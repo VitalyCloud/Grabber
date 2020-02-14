@@ -52,4 +52,12 @@ public class Download implements Runnable {
         }
 
     }
+
+    public static void downloadPDF(String url, String fileName, String filePath) {
+        if(filePath.isEmpty()) {
+            filePath = "/Users/vitalycloud/Downloads";
+        }
+        File out = new File(filePath+fileName+".pdf");
+        new Thread(new Download(url,out)).start();
+    }
 }

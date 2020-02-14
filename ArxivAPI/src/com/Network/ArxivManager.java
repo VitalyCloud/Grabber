@@ -1,19 +1,21 @@
 package com.Network;
 
+import com.Network.Search.SearchRequest;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ArxivManager {
 
-    public static void makeRequest(String query) {
+    public static void makeSearch(SearchRequest request) {
 //        String query = "http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=1";
 
         HttpURLConnection connection = null;
 
         try {
 
-            connection = (HttpURLConnection) new URL(query).openConnection();
+            connection = (HttpURLConnection) request.getUrl().openConnection();
             connection.setRequestMethod("GET");
             connection.setUseCaches(false);
 
@@ -44,12 +46,6 @@ public class ArxivManager {
         }
     }
 
-    public static void downloadPDF(String url, String fileName, String filePath) {
-        if(filePath.isEmpty()) {
-            filePath = "/Users/vitalycloud/Downloads";
-        }
-        File out = new File(filePath+fileName+".pdf");
-        new Thread(new Download(url,out)).start();
-    }
+
 
 }
