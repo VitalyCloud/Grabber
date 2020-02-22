@@ -1,4 +1,4 @@
-package com.Network;
+package com.Network.Interfaces;
 
 import java.net.URL;
 

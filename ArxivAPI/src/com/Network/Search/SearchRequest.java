@@ -1,7 +1,7 @@
 package com.Network.Search;
 
 
-import com.Network.Request;
+import com.Network.Interfaces.Request;
 import com.Network.Search.Parameters.IdList;
 import com.Network.Search.Parameters.MaxResult;
 import com.Network.Search.Parameters.SearchQuery;
