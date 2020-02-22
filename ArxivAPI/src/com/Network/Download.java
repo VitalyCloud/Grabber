@@ -3,6 +3,9 @@ package com.Network;
 import java.io.File;
 import java.io.*;
 import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class Download implements Runnable {
 
@@ -17,47 +20,50 @@ public class Download implements Runnable {
     @Override
     public void run() {
         try {
-            URL linkURL = new URL(linkString);
-            HttpURLConnection http = (HttpURLConnection)linkURL.openConnection();
+            //Set https protocol
+            URL oldUrl = new URL(linkString);
+            URL newUrl = new URL("https", oldUrl.getHost(), oldUrl.getPort(), oldUrl.getFile());
+            System.out.println("Download from: " + newUrl.toString());
 
-            //return number of bytes
-            double fileSize = (double)http.getContentLength();
+            HttpURLConnection conn = (HttpURLConnection) newUrl.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoOutput(true);
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+            FileOutputStream out = new FileOutputStream(this.out);
 
-            BufferedInputStream in = new BufferedInputStream(http.getInputStream());
-            FileOutputStream fos = new FileOutputStream(this.out);
-            BufferedOutputStream bout = new BufferedOutputStream(fos, 1024);
-            byte[] buffer  = new byte[1024];
+            //For download progress
+            double fileSize = (double)conn.getContentLength();
             double downloaded = 0.00;
-            int read = 0;
             double percentDownloaded = 0.00;
-            while((read = in.read(buffer, 0,1024)) >= 0) {
-                bout.write(buffer, 0, read);
-                downloaded += read;
+
+            int len=0;
+            byte[] buff = new byte[1024];
+            len=in.read(buff);
+            while(len!=-1) {
+                out.write(buff);
+                len=in.read(buff);
+
+                //Calculate percent of download
+                downloaded += len;
                 percentDownloaded = (downloaded*100)/fileSize;
                 String percent = String.format("%.4f", percentDownloaded);
+                //TODO: Notify about progress
                 System.out.println("Downloaded " + percent + "% of file.");
             }
-            bout.close();
+            out.flush();
             in.close();
-            System.out.println("com.Network.Download complete");
-
-//            //Simply way without download progress
-//            URL website = new URL(link);
-//            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-//            FileOutputStream fostream = new FileOutputStream(out);
-//            fostream.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            out.close();
+        } catch (MalformedURLException ex) {
+            System.out.println("Error while creating URL");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
-    public static void downloadPDF(String url, String fileName, String filePath) {
-        if(filePath.isEmpty()) {
-            filePath = "/Users/vitalycloud/Downloads";
-        }
-        File out = new File(filePath+fileName+".pdf");
+    public static void perform(String url, File out) {
         new Thread(new Download(url,out)).start();
     }
+
 }

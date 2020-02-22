@@ -1,11 +1,14 @@
-package com;
+package com.FileSystem;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class FileManager {
+
+    public static File createNewFile(String pathName, boolean force) {
+
+        File file = new File(pathName);
+        return file;
+    }
 
     public static String fileToString(File file) {
         try {

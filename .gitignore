@@ -70,3 +70,15 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+#macOs folder
+.DS_Store
+.DS_Store/*
+ArxivAPI/.DS_Store
+ArxivAPI/src/com/.DS_Store
+ArxivAPI/src/.DS_Store
+ArxivAPI/src/com/Network/.DS_Store
+
+#Custom
+Downloads
+.DS_Store
