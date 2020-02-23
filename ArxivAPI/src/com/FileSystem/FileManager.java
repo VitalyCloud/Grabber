@@ -4,7 +4,7 @@ import java.io.*;
 
 public class FileManager {
 
-    public static File createNewFile(String pathName, boolean force) {
+    public static File createNewFile(String pathName) {
 
         File file = new File(pathName);
         return file;

@@ -3,9 +3,6 @@ package com.Network;
 import java.io.File;
 import java.io.*;
 import java.net.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class Download implements Runnable {
 
@@ -50,8 +47,9 @@ public class Download implements Runnable {
                 percentDownloaded = (downloaded*100)/fileSize;
                 String percent = String.format("%.4f", percentDownloaded);
                 //TODO: Notify about progress
-                System.out.println("Downloaded " + percent + "% of file.");
+//                System.out.println("Downloaded " + percent + "% of file.");
             }
+
             out.flush();
             in.close();
             out.close();
@@ -63,7 +61,8 @@ public class Download implements Runnable {
     }
 
     public static void perform(String url, File out) {
-        new Thread(new Download(url,out)).start();
+        Thread newThread = new Thread(new Download(url,out));
+        newThread.start();
     }
 
 }

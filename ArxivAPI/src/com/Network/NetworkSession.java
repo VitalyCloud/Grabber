@@ -12,7 +12,7 @@ public class NetworkSession {
 
     public NetworkSession() {}
 
-    public void makeURLGETRequest(Request request, URLGETRequestCompletion complention) {
+    public String makeURLGETRequest(Request request) {
         HttpURLConnection connection = null;
         String response = "";
         int responseCode = -1;
@@ -39,7 +39,7 @@ public class NetworkSession {
                 connection.disconnect();
             }
         }
-        complention.complention(response, responseCode);
+        return response;
     }
 
     private static String responseToString(InputStream is) {
