@@ -73,12 +73,8 @@ fabric.properties
 
 #macOs folder
 .DS_Store
-.DS_Store/*
 ArxivAPI/.DS_Store
 ArxivAPI/src/com/.DS_Store
 ArxivAPI/src/.DS_Store
 ArxivAPI/src/com/Network/.DS_Store
 
-#Custom
-Downloads
-.DS_Store
