@@ -1,6 +1,6 @@
-package com.Network.Search.Parameters;
+package com.ArxivAPI.Search.Parameters;
 
-import com.Network.Search.Parameters.Field.Field;
+import com.ArxivAPI.Search.Parameters.Field.Field;
 
 public class SearchQuery implements AParameter {
 

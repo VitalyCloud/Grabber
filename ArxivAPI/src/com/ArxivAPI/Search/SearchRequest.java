@@ -1,11 +1,11 @@
-package com.Network.Search;
+package com.ArxivAPI.Search;
 
 
-import com.Network.Interfaces.Request;
-import com.Network.Search.Parameters.IdList;
-import com.Network.Search.Parameters.MaxResult;
-import com.Network.Search.Parameters.SearchQuery;
-import com.Network.Search.Parameters.Start;
+import com.ArxivAPI.Interfaces.Request;
+import com.ArxivAPI.Search.Parameters.IdList;
+import com.ArxivAPI.Search.Parameters.MaxResult;
+import com.ArxivAPI.Search.Parameters.SearchQuery;
+import com.ArxivAPI.Search.Parameters.Start;
 import java.net.URL;
 
 

@@ -1,13 +1,11 @@
-package com.Network;
+package com.ArxivAPI;
 
-import com.Network.Article.Article;
-import com.Network.Parser.ResponseParser;
-import com.Network.Search.Parameters.Field.Field;
-import com.Network.Search.SearchRequest;
+import com.ArxivAPI.Article.Article;
+import com.ArxivAPI.Parser.ResponseParser;
+import com.ArxivAPI.Search.SearchRequest;
+import com.Network.Download;
+import com.Network.NetworkSession;
 
-import javax.swing.text.html.parser.Parser;
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class ArxivManager {

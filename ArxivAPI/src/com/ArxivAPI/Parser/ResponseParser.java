@@ -1,12 +1,17 @@
-package com.Network.Parser;
+package com.ArxivAPI.Parser;
 
-import com.Network.Article.Article;
-import com.Network.Article.Author;
+import com.ArxivAPI.Article.Article;
+import com.ArxivAPI.Article.Author;
+import com.ArxivAPI.Parser.Exceptions.JDKParserException;
+import com.ArxivAPI.Parser.Exceptions.RequestError;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -28,7 +33,7 @@ public class ResponseParser {
         return errorMessage;
     }
 
-    public void parseSearchRequest(String xmlResponse) throws Exception {
+    public void parseSearchRequest(String xmlResponse) throws JDKParserException, RequestError {
 
         System.out.println("Parsing xml response: ");
         System.out.println("-----------------------");
@@ -39,11 +44,18 @@ public class ResponseParser {
         articles.clear();
         errorMessage = "";
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
 
-        InputStream responseStream = new ByteArrayInputStream(xmlResponse.getBytes());
-        Document document = builder.parse(responseStream);
+        Document document;
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+            InputStream responseStream = new ByteArrayInputStream(xmlResponse.getBytes());
+            document = builder.parse(responseStream);
+        }
+        catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+            throw new JDKParserException(e);
+        }
 
         //Parsing
         XMLObject rootXml = new XMLObject(document.getDocumentElement());
@@ -55,7 +67,7 @@ public class ResponseParser {
     }
 
     //Parse one entry
-    private Article parseEntry(XMLObject xmlEntry) throws Exception {
+    private Article parseEntry(XMLObject xmlEntry) throws RequestError {
 
         Article article = new Article();
 
@@ -68,10 +80,10 @@ public class ResponseParser {
         String comment = xmlEntry.getElement("arxiv:comment").getText();
         String doi = xmlEntry.getElement("arxiv:doi").getText();
 
-        //TODO: Check for errors
+        //TODO: Make a tests
         if(title.equals("Error")) {
             errorMessage = summary;
-            throw new ParserException.RequestError(summary);
+            throw new RequestError(summary);
         }
 
         article.setId(id);
@@ -127,7 +139,6 @@ public class ResponseParser {
             article.getCategories().add(category);
         });
 
-        article.print();
         return article;
     }
 

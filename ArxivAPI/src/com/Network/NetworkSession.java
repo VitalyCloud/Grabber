@@ -1,7 +1,6 @@
 package com.Network;
 
-import com.Network.Interfaces.Request;
-import com.Network.Interfaces.URLGETRequestCompletion;
+import com.ArxivAPI.Interfaces.Request;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -10,6 +10,7 @@ public class Main {
         //TODO: Adding proxy to NetworkSessison
         //TODO: Implement FileSystem for different os
         //TODO: Testing
+        Testing.Field();
     }
 
 }

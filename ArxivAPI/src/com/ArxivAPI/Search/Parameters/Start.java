@@ -1,4 +1,4 @@
-package com.Network.Search.Parameters;
+package com.ArxivAPI.Search.Parameters;
 
 public class Start implements AParameter {
 

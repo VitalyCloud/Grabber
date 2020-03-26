@@ -1,5 +1,7 @@
-package com.Network.Search.Parameters;
+package com.ArxivAPI.Search.Parameters;
 
+
+// TODO:: Implement IdList
 public class IdList implements AParameter {
     @Override
     public String getName() {

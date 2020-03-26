@@ -1,4 +1,4 @@
-package com.Network.Search.Parameters.Field.Prefix;
+package com.ArxivAPI.Search.Parameters.Field.Prefix;
 
 public enum PrefixID {
     all, author, _abstract, comment,
