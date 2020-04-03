@@ -1,8 +1,8 @@
-package com.ArxivAPI.Search.Parameters.Field;
+package com.ArxivAPI.Search.Field;
 
-import com.ArxivAPI.Search.Parameters.Field.Prefix.Prefix;
-import com.ArxivAPI.Search.Parameters.Field.Prefix.PrefixFactory;
-import com.ArxivAPI.Search.Parameters.Field.Prefix.PrefixID;
+import com.ArxivAPI.Search.Field.Prefix.Prefix;
+import com.ArxivAPI.Search.Field.Prefix.PrefixFactory;
+import com.ArxivAPI.Search.Field.Prefix.PrefixID;
 
 import java.util.ArrayList;
 import java.util.HashMap;

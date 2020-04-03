@@ -1,20 +1,20 @@
-package com.ArxivAPI.Search.Parameters.Field.Prefix;
+package com.ArxivAPI.Search.Field.Prefix;
 
 public class Prefix {
-    private String field;
+    private String value;
     private String prefix;
 
-    public Prefix(String prefix, String field) {
+    public Prefix(String prefix, String value) {
         this.prefix = prefix;
-        setField(field);
+        setValue(value);
     }
 
     public String getPrefix() { return prefix; }
-    public String getField() { return field; }
+    public String getValue() { return value; }
 
-    public void setField(String field) {
-        field = field.trim();
-        this.field = field.replaceAll(" {2,}", " ");
+    public void setValue(String value) {
+        value = value.trim();
+        this.value = value.replaceAll(" {2,}", " ");
     }
 
     public void setPrefix(String prefix) {
@@ -22,27 +22,27 @@ public class Prefix {
     }
 
     public String getBody() {
-        if(field.isEmpty()) {
-            return field;
+        if(value.isEmpty()) {
+            return value;
         }
 
         String result = getPrefix() + ":";
 
-        if(field.contains(" ")) {
+        if(value.contains(" ")) {
             String newField = "";
             newField += "%22";
-            newField += field.replace(" ", "+");
+            newField += value.replace(" ", "+");
             newField += "%22";
             result+=newField;
         } else {
-            result+=field;
+            result+= value;
         }
 
         return result;
     }
 
     public String toString() {
-        return field;
+        return value;
     }
 
 }

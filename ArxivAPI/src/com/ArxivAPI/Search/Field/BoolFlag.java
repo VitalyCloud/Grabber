@@ -1,4 +1,4 @@
-package com.ArxivAPI.Search.Parameters.Field;
+package com.ArxivAPI.Search.Field;
 
 public enum BoolFlag {
     AND,

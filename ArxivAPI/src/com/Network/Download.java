@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.*;
 import java.net.*;
 
+@Deprecated
 public class Download implements Runnable {
 
     protected String linkString;

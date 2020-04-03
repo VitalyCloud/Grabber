@@ -1,17 +1,24 @@
 package com.ArxivAPI;
 
 import com.ArxivAPI.Article.Article;
+import com.ArxivAPI.Parser.Exceptions.JDKParserException;
+import com.ArxivAPI.Parser.Exceptions.ParseException;
+import com.ArxivAPI.Parser.Exceptions.RequestError;
 import com.ArxivAPI.Parser.ResponseParser;
 import com.ArxivAPI.Search.SearchRequest;
 import com.Network.Download;
+import com.Network.Network;
 import com.Network.NetworkSession;
 
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public class ArxivManager {
     private NetworkSession networkSession;
     private Download download;
     private ResponseParser parser;
+
 
 
     public ArxivManager() {
@@ -20,12 +27,23 @@ public class ArxivManager {
     }
 
     //Find the articles
-    public ArrayList<Article> search(SearchRequest searchRequest) throws Exception {
+    public CompletableFuture<ArrayList<Article>> search(SearchRequest searchRequest)  {
         //TODO: Add exceptions to handle posible errors
         //TODO: Implement
-        String response = networkSession.makeURLGETRequest(searchRequest);
-        parser.parseSearchRequest(response);
-        return parser.getArticles();
+//        String response = networkSession.makeURLGETRequest(searchRequest);
+////        parser.parseSearchRequest(response);
+////        return parser.getArticles();
+
+        //v2.0
+
+        Network network = new Network();
+
+        CompletableFuture<HttpResponse<String>> futureResponse = network.sendRequest(searchRequest);
+        CompletableFuture<ArrayList<Article>> futureParsedResponse = futureResponse.thenApply((response) -> {
+            parser.parseSearchRequest(response.body());
+            return parser.getArticles();
+        });
+        return futureParsedResponse;
     }
 
     //Download article

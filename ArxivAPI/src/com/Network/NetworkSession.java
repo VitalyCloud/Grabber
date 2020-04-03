@@ -1,12 +1,11 @@
 package com.Network;
 
-import com.ArxivAPI.Interfaces.Request;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
+@Deprecated
 public class NetworkSession {
 
     public NetworkSession() {}

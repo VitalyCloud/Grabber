@@ -1,4 +1,4 @@
-package com.ArxivAPI.Interfaces;
+package com.Network;
 
 import java.net.URL;
 

@@ -1,7 +1,7 @@
 package com.ArxivAPI.Search;
 
 
-import com.ArxivAPI.Interfaces.Request;
+import com.Network.Request;
 import com.ArxivAPI.Search.Parameters.IdList;
 import com.ArxivAPI.Search.Parameters.MaxResult;
 import com.ArxivAPI.Search.Parameters.SearchQuery;
@@ -55,6 +55,7 @@ public class SearchRequest implements Request {
 
     /* Request interface */
 
+    //Can be null
     @Override
     public URL getUrl() {
         String sUrl = makeURLString();

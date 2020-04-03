@@ -2,6 +2,7 @@ package com.ArxivAPI.Parser;
 
 
 
+import com.ArxivAPI.Parser.XMLObjectExceptions.NodeInitException;
 import org.w3c.dom.*;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class XMLObject {
             if(element!= null && element.hasAttributes())
                 attributes = element.getAttributes();
         } else {
-            throw new Exception("Node is not ELEMENT_NODE");
+            throw new NodeInitException();
         }
     }
     public boolean isEmpty() {
