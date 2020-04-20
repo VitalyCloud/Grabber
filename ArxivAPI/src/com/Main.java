@@ -11,7 +11,8 @@ public class Main {
         //TODO: Implement FileSystem for different os
         //TODO: Testing
 
-        Testing.Search();
+//        Testing.Search();
+        Testing.Download();
     }
 
 }
