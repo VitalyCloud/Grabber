@@ -1,12 +1,15 @@
 package com.FileManager;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
 
 public class FileManager {
 
-    public static File createNewFile(String pathName) {
-
-        File file = new File(pathName);
+    public static File createNewFile(FileDescriber describer) throws FileAlreadyExistsException {
+        File file = new File(describer.getAbsolutePath());
+        if(file.exists()) {
+            throw new FileAlreadyExistsException("File " + describer.getAbsolutePath() + " is already exist");
+        }
         return file;
     }
 

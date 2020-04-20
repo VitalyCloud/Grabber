@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class ResponseParser {
 
     private ArrayList<Article> articles;
-    private String errorMessage = "";
 
     public ResponseParser() {
         articles = new ArrayList<>();
@@ -29,21 +28,12 @@ public class ResponseParser {
         return articles;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
     public void parseSearchRequest(String xmlResponse) throws JDKParserException, RequestError {
 
-        System.out.println("Parsing xml response: ");
-        System.out.println("-----------------------");
-        System.out.println(xmlResponse);
-        System.out.println("-----------------------");
+        System.out.println("Parsing xml response... ");
 
         //Array of articles
         articles.clear();
-        errorMessage = "";
-
 
         Document document;
         try {
@@ -59,10 +49,13 @@ public class ResponseParser {
 
         //Parsing
         XMLObject rootXml = new XMLObject(document.getDocumentElement());
-        for (XMLObject entrieXml : rootXml.getElements("entry")) {
+        ArrayList<XMLObject> entries = rootXml.getElements("entry");
+        for (XMLObject entrieXml : entries) {
             Article article = parseEntry(entrieXml);
             articles.add(article);
         }
+
+        System.out.println("Parsing has been completed");
 
     }
 
@@ -82,7 +75,6 @@ public class ResponseParser {
 
         //TODO: Make a tests
         if(title.equals("Error")) {
-            errorMessage = summary;
             throw new RequestError(summary);
         }
 

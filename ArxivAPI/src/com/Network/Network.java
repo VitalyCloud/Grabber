@@ -13,11 +13,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class Network {
     HttpClient client;
-    DownloadManager downloadManager;
 
     public Network() {
         client = HttpClient.newHttpClient();
-        downloadManager = new DownloadManager(1);
     }
 
     public CompletableFuture<HttpResponse<String>> sendGETRequest(Request newRequest) {
@@ -35,7 +33,4 @@ public class Network {
         return null;
     }
 
-    public DownloadManager getDownloadManager() {
-        return downloadManager;
-    }
 }

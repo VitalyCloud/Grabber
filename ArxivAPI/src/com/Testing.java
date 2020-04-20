@@ -8,6 +8,8 @@ import com.ArxivAPI.Search.Parameters.MaxResult;
 import com.ArxivAPI.Search.Parameters.SearchQuery;
 import com.ArxivAPI.Search.SearchRequest;
 import com.ArxivAPI.Handlers.SearchCompletion;
+import com.FileManager.FileDescriber;
+import com.FileManager.FileExtension;
 import com.FileManager.FileManager;
 import com.Network.DownloadManager;
 import com.Network.DownloadTask;
@@ -15,7 +17,7 @@ import com.Network.DownloadTask;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+
 
 public class Testing {
 
@@ -24,19 +26,19 @@ public class Testing {
     public static void Search() {
 
         Field field = new Field();
-        field.addAll("dog", BoolFlag.UNDEFINED);
+        field.addAuthor("Akbarov", BoolFlag.UNDEFINED);
 
         SearchQuery searchQuery = new SearchQuery(field);
 
         SearchRequest searchRequest = new SearchRequest(searchQuery);
-        searchRequest.setMaxResult(new MaxResult(3));
+        searchRequest.setMaxResult(new MaxResult(1));
 
         arxivManager.search(searchRequest, new SearchCompletion() {
             @Override
-            public void completion(ArrayList<Article> data, Throwable error) {
+            public void complete(ArrayList<Article> data, Throwable error) {
                 if(data!=null) {
                     for(Article article: data)
-                        article.print();
+                        Download(article);
                 } else {
                     System.out.println("Handle Errors:");
                     error.printStackTrace();
@@ -44,70 +46,46 @@ public class Testing {
             }
         });
 
-        try {Thread.sleep(2000);}
+        try {Thread.sleep(10000);}
         catch (Exception ex) {ex.printStackTrace();}
-
-//        CompletableFuture<ArrayList<Article>> futureResult = arxivManager.search(searchRequest);
-//        futureResult.thenAccept( articles -> {
-//            for(Article article: articles) {
-//                article.print();
-//            }
-//
-//        }).exceptionally( error -> {
-//            error.printStackTrace();
-//            return null;
-//        });
-//
-//        try {
-//            futureResult.get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
     }
 
-    
-
-
-    public static void Download() {
-
-        URL url = null;
+    public static void Download(Article article) {
         String filePath = "/Users/vitalycloud/Desktop/";
+        FileDescriber describer = new FileDescriber(filePath, "Akbarov1", FileExtension.PDF);
 
-        String fileName1 = "test1.pdf";
-        String fileName2 = "test2.pdf";
-
-        File file1 = FileManager.createNewFile(filePath+fileName1);
-        File file2 = FileManager.createNewFile(filePath+fileName2);
-
-        try {
-            url = new URL("http://arxiv.org/pdf/1912.00839v1");
-        } catch (Exception ex) {}
-        
-        DownloadTask newDownload = new DownloadTask(url, file1, (file, error) -> {
+        arxivManager.download(article, describer, (file, error) -> {
             if(error==null) {
-                System.out.println("Downloading " + file.getName() + " completed Successful");
-            } else {
-                System.out.println("Downloading " + file.getName() + " completed with error");
+                System.out.println("Download file "+file.getName()+ " completed Success\n" +
+                        file.getAbsolutePath());
+            }
+            else {
+                System.out.println("Download file completed with Error");
                 error.printStackTrace();
             }
         });
-
-
-        DownloadTask anotherDownload = new DownloadTask(url, file2, (file, error) -> {
-            if(error==null) {
-                System.out.println("Downloading " + file.getName() + " completed Successful");
-            } else {
-                System.out.println("Downloading " + file.getName() + " completed with error");
-                error.printStackTrace();
-            }
-        });
-
-        DownloadManager manager = new DownloadManager(10);
-        manager.downloadNow(newDownload);
-
-
     }
 
+
+    //NOT WORKING
+    public static void DownloadPNG() {
+        try {
+            URL url = new URL("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dk4p7YnbLNvY&psig=AOvVaw2mcpsOtXX6168tsnkmf9Bp&ust=1587473822625000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjOsIGH9-gCFQAAAAAdAAAAABAO");
+            String fileName = "CharlieScene";
+            String path = "/Users/vitalycloud/Desktop/";
+            FileDescriber fileDescriber = new FileDescriber(path, fileName, FileExtension.PNG);
+            File file = FileManager.createNewFile(fileDescriber);
+            DownloadTask task = new DownloadTask(url, file, (downloadedFile, error) -> {
+                if(error==null) {
+                    System.out.println("File "+ file.getName() + " downloaded successful");
+                } else {
+                    System.out.println("File "+ file.getName() + " downloaded with error");
+                    error.printStackTrace();
+                }
+            });
+
+            DownloadManager.downloadNow(task);
+
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
 }

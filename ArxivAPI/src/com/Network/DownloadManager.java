@@ -2,23 +2,33 @@ package com.Network;
 import java.util.concurrent.*;
 
 public class DownloadManager {
-    ScheduledThreadPoolExecutor executor;
+    private static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
-    public DownloadManager(int poolSize) {
-        this.executor= new ScheduledThreadPoolExecutor(poolSize);
-    }
 
-    public void downloadNow(DownloadTask task) {
+    public static void downloadNow(DownloadTask task) {
         executor.execute(task);
     }
 
-    public void downloadWithDelay(DownloadTask task, int delay, TimeUnit unit) {
+    public static void downloadWithDelay(DownloadTask task, int delay, TimeUnit unit) {
         executor.schedule(task, delay, unit);
     }
 
     //TODO:: Протестить смену размера при выполнении скачивания
-    public void setPoolSize(int size) {
+    public static void setPoolSize(int size) {
         executor.setCorePoolSize(size);
+    }
+
+    public static void closePoolsOnFinish() {
+        int activeTask = 1;
+        while(activeTask>0) {
+            activeTask = executor.getActiveCount();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        executor.shutdown();
     }
 }
 
