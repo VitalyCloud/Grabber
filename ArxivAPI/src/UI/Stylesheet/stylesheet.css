@@ -1,0 +1,120 @@
+/*-----------Menu-------------*/
+
+.menu-bar {
+	-fx-background-color: #D3D0D0;
+	-fx-border-color: #ABACAD;
+	-fx-border-width: 0 2 2 2;
+	-fx-pref-width: 260;
+	-fx-padding: 60 10 10 10;
+	-fx-spacing: 15;
+}
+
+.menu-button {
+	-fx-background-color: rgba(0, 0, 0, 0);
+	-fx-text-fill: #77889A;
+	-fx-font-family: "Lucida Grande";
+	-fx-font-size: 22px;
+}
+
+/*-----------StatusBar-------------*/
+
+.status-bar {
+	-fx-background-color: rgba(216, 216, 216, 71);
+	-fx-border-color: rgb(191, 190, 190);
+	-fx-border-width: 2;
+	-fx-pref-height: 98;
+}
+
+
+
+/*-----------Search-------------*/
+
+.search-window-border-pane {
+	-fx-focus-color: none;
+	-fx-faint-focus-color: rgba(0,0,0,0);
+}
+
+.search-window {
+	-fx-background-color: #D8D8D8;
+	-fx-spacing: 15;
+	-fx-padding: 60 0 30 0;
+	-fx-border-width: 0;
+	-fx-border-color: #979797;
+
+	-fx-focus-color: none;
+	-fx-faint-focus-color: rgba(0,0,0,0);
+}
+
+.search-row {
+	-fx-spacing: 12;
+	-fx-alignment: center;
+}
+
+.search-row-search-field {
+	-fx-text-fill: black;
+	-fx-background-color: none;
+	-fx-border-color: #979797;
+}
+
+.search-row-action-button {
+	-fx-text-fill: gray;
+	-fx-background-color: none;
+	-fx-border-color: #979797;
+	-fx-border-radius: 0 8 8 0;
+	-fx-border-width: 1 1 1 0;
+	/*-fx-font-size: 20;*/
+}
+
+.search-row-bool-flag {
+	-fx-background-color: #D8D8D8;
+	-fx-border-color: #979797;
+	-fx-text-fill: #707272;
+	-fx-border-width: 1;
+}
+
+.search-row-prefix-box {
+	-fx-background-color: none;
+	-fx-border-color: #979797;
+	-fx-text-fill: black;
+	-fx-border-width: 1 1 1 0;
+}
+
+.search-window-search-button-pane {
+	-fx-background-color: #D8D8D8;
+	-fx-alignment: center;
+	-fx-padding: 28 0 28 0;
+	-fx-border-width: 0;
+}
+
+.search-window-search-button {
+	-fx-background-color: #D8D8D8;
+	-fx-border-color: #979797;
+	-fx-border-radius: 10;
+}
+
+/*-----------SearchResult-------------*/
+
+.search-result-window {
+	-fx-padding: 60 53 30 53;
+	-fx-alignment: top-center;
+	-fx-spacing: 28;
+	-fx-background-color: #FFFFFF;
+}
+
+.search-result-row {
+	-fx-background-color: pink;
+	-fx-background-radius: 12;
+	-fx-background-color: #D8D8D8;
+	-fx-box-border: 979797 ;
+	/*-fx-border-color: 979797;
+	-fx-border-width: 10*/;
+/*	-fx-border-radius: 12;
+	-fx-border-color: gray;*/
+}
+
+
+
+
+
+
+
