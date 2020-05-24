@@ -13,7 +13,7 @@ public class DownloadConnection {
     private static Proxy proxy;
     private static Authenticator authenticator;
 
-    public URLConnection openConnection(URL url) throws IOException {
+    public static URLConnection openConnection(URL url) throws IOException {
         System.out.println("Opening connection...");
         URLConnection urlConnection;
         if(proxy!=null) {

@@ -16,7 +16,6 @@ public class DownloadTask {
 
     private URL url;
     private File file;
-    private DownloadConnection downloadConnection;
 
     private DownloadTaskProgressUpdate progress;
 
@@ -24,7 +23,6 @@ public class DownloadTask {
         this.url = url;
         this.file = file;
         //TODO: Не используется прокси
-        downloadConnection = new DownloadConnection();
     }
 
     public File download() throws IOException {
@@ -36,7 +34,7 @@ public class DownloadTask {
         System.out.println("Start downloading from: " + newUrl.toString());
 
         //Configuration connection
-        HttpsURLConnection conn = (HttpsURLConnection) downloadConnection.openConnection(newUrl);
+        HttpsURLConnection conn = (HttpsURLConnection) DownloadConnection.openConnection(newUrl);
         conn.setRequestMethod("GET");
         conn.setDoOutput(true);
 

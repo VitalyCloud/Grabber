@@ -73,7 +73,7 @@ public class Testing {
         });
 
         downloadTask2.setOnSucceeded(e -> {
-            File outfile = downlaodTask.getValue();
+            File outfile = downloadTask2.getValue();
             System.out.println("Download Complete: " + outfile.getAbsolutePath());
         });
 
