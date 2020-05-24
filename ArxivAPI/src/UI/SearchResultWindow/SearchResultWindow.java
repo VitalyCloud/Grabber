@@ -48,6 +48,10 @@ public class SearchResultWindow {
         return searchCompletion;
     }
 
+    public SearchResultKeeper getSearchResultKeeper() {
+        return searchResultKeeper;
+    }
+
     boolean isConfigured = false;
     public Pane getPane() {
         if(isConfigured == false) {

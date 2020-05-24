@@ -33,18 +33,18 @@ public class Testing {
         SearchRequest searchRequest = new SearchRequest(searchQuery);
         searchRequest.setMaxResult(new MaxResult(1));
 
-        arxivManager.search(searchRequest, new SearchCompletion() {
-            @Override
-            public void complete(ArrayList<Article> data, Throwable error) {
-                if(data!=null) {
-                    for(Article article: data)
-                        Download(article);
-                } else {
-                    System.out.println("Handle Errors:");
-                    error.printStackTrace();
-                }
-            }
-        });
+//        arxivManager.search(searchRequest, new SearchCompletion() {
+//            @Override
+//            public void complete(ArrayList<Article> data, Throwable error) {
+//                if(data!=null) {
+//                    for(Article article: data)
+//                        Download(article);
+//                } else {
+//                    System.out.println("Handle Errors:");
+//                    error.printStackTrace();
+//                }
+//            }
+//        });
 
         try {Thread.sleep(10000);}
         catch (Exception ex) {ex.printStackTrace();}

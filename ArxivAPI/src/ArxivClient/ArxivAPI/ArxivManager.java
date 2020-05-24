@@ -28,8 +28,7 @@ public class ArxivManager {
     }
 
     //Find the articles
-    public void search(SearchRequest searchRequest,
-                       SearchCompletion searchCompletion)  {
+    public CompletableFuture<ArrayList<Article>> search(SearchRequest searchRequest)  {
 
         CompletableFuture<HttpResponse<String>> futureResponse = network.sendGETRequest(searchRequest);
         CompletableFuture<ArrayList<Article>> futureParsedResponse = futureResponse.thenApply((response) -> {
@@ -37,10 +36,7 @@ public class ArxivManager {
             return parser.getArticles();
         });
 
-        futureParsedResponse.handle((articles, error) -> {
-            searchCompletion.complete(articles, error);
-            return articles;
-        });
+        return futureParsedResponse;
     }
 
     //Download article
