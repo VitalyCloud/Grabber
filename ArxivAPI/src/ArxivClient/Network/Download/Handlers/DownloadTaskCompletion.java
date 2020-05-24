@@ -1,7 +1,6 @@
-package ArxivClient.Network.Iterfaces.Handlers;
+package ArxivClient.Network.Download.Handlers;
 
 import java.io.File;
-import java.io.IOException;
 
 public interface DownloadTaskCompletion {
     public void complete(File file, Exception error);

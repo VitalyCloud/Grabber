@@ -1,4 +1,4 @@
-package ArxivClient.Network;
+package ArxivClient.Network.Download;
 
 import java.io.IOException;
 import java.net.Authenticator;
@@ -6,7 +6,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class ConnectionManager {
+public class DownloadConnection {
 
     //TODO:: Test this bullshit
 
@@ -35,9 +35,9 @@ public class ConnectionManager {
 
     //Setters
     public static void setProxy(Proxy proxy) {
-        ConnectionManager.proxy = proxy;
+        DownloadConnection.proxy = proxy;
     }
     public static void setAuthenticator(Authenticator authenticator) {
-        ConnectionManager.authenticator = authenticator;
+        DownloadConnection.authenticator = authenticator;
     }
 }

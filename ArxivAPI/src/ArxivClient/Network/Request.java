@@ -1,4 +1,4 @@
-package ArxivClient.Network.Iterfaces;
+package ArxivClient.Network;
 
 import java.net.URL;
 

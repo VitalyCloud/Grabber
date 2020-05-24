@@ -1,10 +1,10 @@
-package ArxivClient.ArxivAPI.Search;
+package ArxivClient.ArxivAPI;
 
 
-import ArxivClient.ArxivAPI.Search.Parameters.IdList;
-import ArxivClient.ArxivAPI.Search.Parameters.MaxResult;
-import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
-import ArxivClient.ArxivAPI.Search.Parameters.Start;
+import ArxivClient.ArxivAPI.Field.SearchField;
+import ArxivClient.ArxivAPI.Parameters.IdList;
+import ArxivClient.ArxivAPI.Parameters.MaxResult;
+import ArxivClient.ArxivAPI.Parameters.Start;
 import ArxivClient.Network.Request;
 
 import java.net.URL;
@@ -17,7 +17,7 @@ public class SearchRequest implements Request {
 
 
     //Parameters
-    private SearchQuery searchQuery;
+    private SearchField searchField;
     private MaxResult maxResult;
     private Start start;
     private IdList idList;
@@ -27,8 +27,8 @@ public class SearchRequest implements Request {
 
     public SearchRequest() {}
 
-    public SearchRequest(SearchQuery query) {
-        searchQuery = query;
+    public SearchRequest(SearchField query) {
+        searchField = query;
     }
 
     /* --------------------------------------------- */
@@ -36,8 +36,8 @@ public class SearchRequest implements Request {
     //Making URL string
     private String makeURLString() {
         String result = name;
-        if(searchQuery != null)
-            result+= searchQuery.getBody();
+        if(searchField != null)
+            result+= searchField.getBody();
         else
             return "";
 
@@ -82,12 +82,12 @@ public class SearchRequest implements Request {
 
 
     /* Getters and Setters* */
-    public SearchQuery getSearchQuery() {
-        return searchQuery;
+    public SearchField getSearchQuery() {
+        return searchField;
     }
 
-    public void setSearchQuery(SearchQuery searchQuery) {
-        this.searchQuery = searchQuery;
+    public void setSearchQuery(SearchField searchQuery) {
+        this.searchField = searchQuery;
     }
 
     public MaxResult getMaxResult() {

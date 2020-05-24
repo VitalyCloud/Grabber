@@ -1,4 +1,4 @@
-package ArxivClient.ArxivAPI.Search.Parameters;
+package ArxivClient.ArxivAPI.Parameters;
 
 public interface AParameter {
     public String getName();

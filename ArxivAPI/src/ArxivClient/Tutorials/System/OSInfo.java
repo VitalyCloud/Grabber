@@ -1,4 +1,4 @@
-package ArxivClient.System;
+package ArxivClient.Tutorials.System;
 
 import java.io.IOException;
 import java.util.Locale;

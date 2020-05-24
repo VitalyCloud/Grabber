@@ -2,7 +2,6 @@ package UI;
 
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.ArxivAPI.ArxivManager;
-import ArxivClient.ArxivAPI.Search.SearchException;
 import ArxivClient.ArxivAPI.Search.SearchRequest;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -25,10 +24,6 @@ public class SearchArticlesService extends Service<ArrayList<Article>> {
         Task<ArrayList<Article>> task = new Task<ArrayList<Article>>() {
             @Override
             protected ArrayList<Article> call() throws Exception {
-                if(searchRequest==null) {
-                    throw new SearchException();
-                }
-
                 CompletableFuture<ArrayList<Article>> cmpFuture = arxivManager.search(searchRequest);
                 cmpFuture.exceptionally((error) ->{
                     this.setException(error);
@@ -38,7 +33,7 @@ public class SearchArticlesService extends Service<ArrayList<Article>> {
                 return arxivManager.search(searchRequest).get();
             }
         };
-
+        return task;
     }
 
     public SearchRequest getSearchRequest() {

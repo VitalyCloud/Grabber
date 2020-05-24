@@ -1,6 +1,4 @@
-package ArxivClient.ArxivAPI.Search.Field.Prefix;
-
-import java.util.ArrayList;
+package ArxivClient.ArxivAPI.Prefix;
 
 public class Prefix {
     private String value;

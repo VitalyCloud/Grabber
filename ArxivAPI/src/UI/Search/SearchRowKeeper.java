@@ -4,8 +4,6 @@ import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
 import ArxivClient.ArxivAPI.Search.Field.Field;
 import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
 import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;

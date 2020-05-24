@@ -1,17 +1,19 @@
 package ArxivClient.ArxivAPI.Field;
 
 //import ArxivClient.ArxivAPI.Prefix.PrefixID;
+import ArxivClient.ArxivAPI.Parameters.AParameter;
 import ArxivClient.ArxivAPI.Prefix.Prefix;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Field {
+public class SearchField implements AParameter {
 
+    private final String paramenterName = "search_query=";
     HashMap<Prefix, BoolFlag> prefixesProperty;
     protected ArrayList<Prefix> prefixList;
 
-    public Field() {
+    public SearchField() {
         this.prefixList = new ArrayList<>();
         this.prefixesProperty = new HashMap<>();
     }
@@ -43,8 +45,13 @@ public class Field {
 
     /* --------------------------------------- */
 
+    @Override
+    public String getName() {
+        return paramenterName;
+    }
+
     public String getBody() {
-        return getPrefixesBody();
+        return getName() + getPrefixesBody();
     }
 
     /* --------------------------------------- */
