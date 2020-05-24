@@ -38,37 +38,5 @@ public class PrefixFactory {
         return new Prefix("ti", field);
     }
 
-    public Prefix forID(PrefixID id, String value) {
-        switch (id) {
-            case all: {
-                return all(value);
-            }
-            case _abstract: {
-                return _abstract(value);
-            }
-            case comment: {
-                return comment(value);
-            }
-            case author: {
-                return author(value);
-            }
-            case id: {
-                return id(value);
-            }
-            case journalReference: {
-                return journalReference(value);
-            }
-            case reportNumber: {
-                return reportNumber(value);
-            }
-            case subjectCategory: {
-                return subjectCategory(value);
-            }
-            case title: {
-                return title(value);
-            }
-        }
-        return null;
-    }
 
 }

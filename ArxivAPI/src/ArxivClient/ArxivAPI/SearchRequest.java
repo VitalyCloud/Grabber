@@ -5,7 +5,7 @@ import ArxivClient.ArxivAPI.Search.Parameters.IdList;
 import ArxivClient.ArxivAPI.Search.Parameters.MaxResult;
 import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
 import ArxivClient.ArxivAPI.Search.Parameters.Start;
-import ArxivClient.Network.Iterfaces.Request;
+import ArxivClient.Network.Request;
 
 import java.net.URL;
 
