@@ -1,4 +1,4 @@
-package com.ArxivAPI.Parser.XMLObjectExceptions;
+package ArxivClient.ArxivAPI.Parser.XMLObjectExceptions;
 
 public class NodeInitException extends XMLObjectException {
     public NodeInitException() {

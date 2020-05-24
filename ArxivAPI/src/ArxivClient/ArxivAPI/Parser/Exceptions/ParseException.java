@@ -1,4 +1,4 @@
-package com.ArxivAPI.Parser.Exceptions;
+package ArxivClient.ArxivAPI.Parser.Exceptions;
 
 public class ParseException extends RuntimeException {
     public ParseException(String message, Exception ex) {

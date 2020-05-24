@@ -1,6 +1,7 @@
 package UI.Control;
 
 import UI.Factories.ButtonFactory;
+import UI.MainWindow;
 import UI.Stylesheet.StyleSheet;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -40,6 +41,19 @@ public class MenuBar {
         pane.getChildren().add(searchButtonLayout);
         pane.getChildren().add(downloadButtonLayout);
         pane.getChildren().add(settingsButtonLayout);
+
+    }
+
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public Button getDownloadButton() {
+        return downloadButton;
+    }
+
+    public Button getSettingsButton() {
+        return settingsButton;
     }
 
     boolean isConfigured = false;

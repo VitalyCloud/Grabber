@@ -1,7 +1,7 @@
-package com.ArxivAPI.Handlers;
+package ArxivClient.ArxivAPI.Handlers;
 
-import com.ArxivAPI.Article.Article;
-import com.Network.Iterfaces.Handlers.GETRequestCompletion;
+import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.Network.Iterfaces.Handlers.GETRequestCompletion;
 
 import java.util.ArrayList;
 

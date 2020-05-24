@@ -1,4 +1,4 @@
-package com.FileManager;
+package ArxivClient.FileManager;
 
 public enum FileExtension {
     PDF, PNG

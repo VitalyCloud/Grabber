@@ -1,5 +1,10 @@
 package UI.Search;
 
+import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
+import ArxivClient.ArxivAPI.Search.Field.Field;
+import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
+import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -16,9 +21,26 @@ public class SearchRowKeeper {
         this.pane = pane;
         firstRow = new SearchRow();
         searchRows = new ArrayList<>();
+
         firstRow.setActionButtonState(true);
         pane.getChildren().add(firstRow.getPane());
+        searchRows.add(firstRow);
         firstRow.getActionButton().setOnAction(e -> addRow(firstRow));
+        firstRow.getBoolFlag().setVisible(false);
+    }
+
+    public SearchQuery getSearchQuery() {
+        Field field = new Field();
+        searchRows.forEach( searchRow -> {
+            String text = searchRow.getTextField().getText();
+            if(!text.isEmpty()) {
+                BoolFlag boolFlag = searchRow.getBoolFlag().getValue();
+                PrefixID prefix = searchRow.getPrefix().getValue();
+                field.add(prefix, text, boolFlag);
+            }
+        });
+        SearchQuery searchQuery = new SearchQuery(field);
+        return searchQuery;
     }
 
 
@@ -39,10 +61,10 @@ public class SearchRowKeeper {
     }
 
     private void hideBoolAtFirstRow() {
-        //Hide boolFlag for first row
-        HBox first = (HBox) pane.getChildren().get(0);
-        if(first != null) {
-            first.getChildren().get(0).setVisible(false);
+        SearchRow first = searchRows.get(0);
+        if(first!=null) {
+            first.getBoolFlag().setValue(BoolFlag.UNDEFINED);
+            first.getBoolFlag().setVisible(false);
         }
     }
 

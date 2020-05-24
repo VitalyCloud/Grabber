@@ -1,4 +1,4 @@
-package com.Tutorials;
+package ArxivClient.Tutorials;
 
 public class Lambda {
     public static void main(String[] args) {

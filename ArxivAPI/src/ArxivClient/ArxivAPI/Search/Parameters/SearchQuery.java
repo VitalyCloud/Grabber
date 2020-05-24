@@ -1,6 +1,6 @@
-package com.ArxivAPI.Search.Parameters;
+package ArxivClient.ArxivAPI.Search.Parameters;
 
-import com.ArxivAPI.Search.Field.Field;
+import ArxivClient.ArxivAPI.Search.Field.Field;
 
 public class SearchQuery implements AParameter {
 

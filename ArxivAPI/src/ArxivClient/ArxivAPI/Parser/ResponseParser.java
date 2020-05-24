@@ -1,9 +1,9 @@
-package com.ArxivAPI.Parser;
+package ArxivClient.ArxivAPI.Parser;
 
-import com.ArxivAPI.Article.Article;
-import com.ArxivAPI.Article.Author;
-import com.ArxivAPI.Parser.Exceptions.JDKParserException;
-import com.ArxivAPI.Parser.Exceptions.RequestError;
+import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.ArxivAPI.Article.Author;
+import ArxivClient.ArxivAPI.Parser.Exceptions.RequestError;
+import ArxivClient.ArxivAPI.Parser.Exceptions.JDKParserException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 

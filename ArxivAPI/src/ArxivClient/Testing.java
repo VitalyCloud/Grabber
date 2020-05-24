@@ -1,18 +1,18 @@
-package com;
+package ArxivClient;
 
-import com.ArxivAPI.Article.Article;
-import com.ArxivAPI.ArxivManager;
-import com.ArxivAPI.Search.Field.BoolFlag;
-import com.ArxivAPI.Search.Field.Field;
-import com.ArxivAPI.Search.Parameters.MaxResult;
-import com.ArxivAPI.Search.Parameters.SearchQuery;
-import com.ArxivAPI.Search.SearchRequest;
-import com.ArxivAPI.Handlers.SearchCompletion;
-import com.FileManager.FileDescriber;
-import com.FileManager.FileExtension;
-import com.FileManager.FileManager;
-import com.Network.DownloadManager;
-import com.Network.DownloadTask;
+import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.ArxivAPI.Handlers.SearchCompletion;
+import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
+import ArxivClient.ArxivAPI.Search.Field.Field;
+import ArxivClient.ArxivAPI.Search.Parameters.MaxResult;
+import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
+import ArxivClient.ArxivAPI.Search.SearchRequest;
+import ArxivClient.FileManager.FileDescriber;
+import ArxivClient.FileManager.FileExtension;
+import ArxivClient.FileManager.FileManager;
+import ArxivClient.Network.DownloadManager;
+import ArxivClient.Network.DownloadTask;
+import ArxivClient.ArxivAPI.ArxivManager;
 
 import java.io.File;
 import java.net.URL;

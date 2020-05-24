@@ -1,4 +1,4 @@
-package com.FileManager;
+package ArxivClient.FileManager;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;

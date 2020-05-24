@@ -1,15 +1,15 @@
-package com.ArxivAPI;
+package ArxivClient.ArxivAPI;
 
-import com.ArxivAPI.Article.Article;
-import com.ArxivAPI.Handlers.SearchCompletion;
-import com.ArxivAPI.Parser.ResponseParser;
-import com.ArxivAPI.Search.SearchRequest;
-import com.FileManager.FileDescriber;
-import com.FileManager.FileManager;
-import com.Network.DownloadManager;
-import com.Network.DownloadTask;
-import com.Network.Iterfaces.Handlers.DownloadTaskCompletion;
-import com.Network.Network;
+import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.ArxivAPI.Handlers.SearchCompletion;
+import ArxivClient.ArxivAPI.Parser.ResponseParser;
+import ArxivClient.ArxivAPI.Search.SearchRequest;
+import ArxivClient.FileManager.FileDescriber;
+import ArxivClient.FileManager.FileManager;
+import ArxivClient.Network.DownloadManager;
+import ArxivClient.Network.DownloadTask;
+import ArxivClient.Network.Iterfaces.Handlers.DownloadTaskCompletion;
+import ArxivClient.Network.Network;
 
 import java.io.File;
 import java.net.URL;

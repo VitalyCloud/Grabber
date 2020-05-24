@@ -1,6 +1,6 @@
-package com.Network;
+package ArxivClient.Network;
 
-import com.Network.Iterfaces.Request;
+import ArxivClient.Network.Iterfaces.Request;
 
 import java.io.File;
 import java.net.URI;

@@ -1,5 +1,6 @@
 package UI.SearchResultWindow;
 
+import ArxivClient.ArxivAPI.Article.Article;
 import UI.Stylesheet.StyleSheet;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -9,25 +10,40 @@ import javafx.scene.paint.Color;
 
 public class SearchResultRow extends Pane {
 
-    public SearchResultRow() {
+    Article article;
+
+    public SearchResultRow(Article article) {
         super();
+        this.article = article;
+
         getStylesheets().add(StyleSheet.get());
         getStyleClass().add("search-result-row");
+
+        //TODO: Move to stysheet
         setPrefSize(1076, 293);
 
-        VBox hBox = new VBox();
+        VBox vBox = new VBox();
 
-        Label first = new Label("qweqweqweqweqweqweqwe: ---------------------------------------\n" +
-                "-----------------------------------------------------------------------------------\n" +
-                "-----------------------------------------------------------------------------------\n" +
-                "-----------------------------------------------------------------------------------\n");
-        Label second = new Label("qweqweqweqweqweqweqwe");
-        Label third = new Label("qweqweqweqweqweqweqwe");
-        Label forth = new Label("qweqweqweqweqweqweqwe");
+        Label label = new Label(article.getTitle());
+        System.out.println("Inside Row" + label.getText());
+        vBox.getChildren().add(label);
 
-        hBox.getChildren().addAll(first, second, third, forth);
+        getChildren().add(vBox);
+    }
 
-        getChildren().add(hBox);
+    public SearchResultRow() {
+        super();
+        this.article = article;
+
+        getStylesheets().add(StyleSheet.get());
+        getStyleClass().add("search-result-row");
+
+        //TODO: Move to stysheet
+        setPrefSize(1076, 293);
+    }
+
+    public Article getArticle() {
+        return article;
     }
 
 }

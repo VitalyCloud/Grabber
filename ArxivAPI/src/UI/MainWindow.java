@@ -1,50 +1,76 @@
 package UI;
 
+import ArxivClient.ArxivAPI.Article.Article;
 import UI.Control.MenuBar;
 import UI.Control.StatusBar;
 import UI.Search.SearchWindow;
 import UI.SearchResultWindow.SearchResultWindow;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
 
 public class MainWindow extends BorderPane {
 
-    private static MenuBar menuBar;
-    private static StatusBar statusBar;
-    private static SearchWindow searchWindow;
-    private static SearchResultWindow searchResultWindow;
+    public static final MainWindow INSTANCE = new MainWindow();
+
+    private MenuBar menuBar;
+    private StatusBar statusBar;
+    private SearchWindow searchWindow;
+    private SearchResultWindow searchResultWindow;
 
 
-    public MainWindow() {
+    private MainWindow() {
         super();
 
         menuBar = new MenuBar();
         statusBar = new StatusBar();
         searchWindow = new SearchWindow();
+        searchResultWindow = new SearchResultWindow();
     }
 
     public void config() {
         setLeft(menuBar.getPane());
         setTop(statusBar.getPane());
-//        setCenter(searchWindow.getPane());
+        setCenter(searchWindow.getPane());
 
-        searchResultWindow = new SearchResultWindow();
+        menuBar.getSearchButton().setOnAction(e -> {
+            setCenter(searchWindow.getPane());
+        });
+        menuBar.getDownloadButton().setOnAction(e -> {
+            setCenter(new HBox());
+        });
+        menuBar.getSettingsButton().setOnAction(e -> {
+            setCenter(new HBox());
+        });
+
+    }
+
+
+
+    public void showSearchResultWindow() {
         setCenter(searchResultWindow.getPane());
-
+        statusBar.showReturnButton();
     }
 
-    public static MenuBar getMenuBar() {
-        return MainWindow.menuBar;
+    public void showSearchWindow() {
+        setCenter(searchWindow.getPane());
+        statusBar.showReturnButton();
     }
 
-    public static StatusBar getStatusBar() {
-        return MainWindow.statusBar;
+    public MenuBar getMenuBar() {
+        return menuBar;
     }
 
-    public static SearchWindow getSearchWindow() {
-        return MainWindow.searchWindow;
+    public StatusBar getStatusBar() {
+        return statusBar;
     }
 
-    public static SearchResultWindow getSearchResultWindow() {
-        return MainWindow.searchResultWindow;
+    public SearchWindow getSearchWindow() {
+        return searchWindow;
+    }
+
+    public SearchResultWindow getSearchResultWindow() {
+        return searchResultWindow;
     }
 }

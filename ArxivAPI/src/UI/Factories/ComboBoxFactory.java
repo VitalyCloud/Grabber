@@ -1,18 +1,37 @@
 package UI.Factories;
 
+import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
+import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
 import UI.Stylesheet.StyleSheet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 public class ComboBoxFactory {
 
-    public static ComboBox<String> boolFlag() {
-        ComboBox<String> comboBox = getStyled("search-row-bool-flag");
-        ObservableList<String> values =
-                FXCollections.observableArrayList("AND", "OR", "NOT");
+    public static ComboBox<PrefixID> prefixBox() {
+        ComboBox<PrefixID> comboBox = getStyled("search-row-prefix-box");
+        ObservableList<PrefixID> values =
+                FXCollections.observableArrayList(PrefixID.values());
         comboBox.setItems(values);
+        //Default Value
+        comboBox.setValue(PrefixID.all);
+
+        //TODO: Move to CSS stylesheet
+        comboBox.setPrefSize(174,35);
+
+
+        return comboBox;
+    }
+
+    public static ComboBox<BoolFlag> boolFlag() {
+        ComboBox<BoolFlag> comboBox = getStyled("search-row-bool-flag");
+        ObservableList<BoolFlag> values =
+                FXCollections.observableArrayList(BoolFlag.AND, BoolFlag.OR, BoolFlag.NOT);
+        comboBox.setItems(values);
+
+        //Default Value
+        comboBox.setValue(BoolFlag.OR);
 
         //TODO: Move to CSS stylesheet
         comboBox.setPrefSize(80,35);
@@ -20,18 +39,6 @@ public class ComboBoxFactory {
 
         return comboBox;
     }
-
-    public static ComboBox<String> prefixBox() {
-        ComboBox<String> comboBox = getStyled("search-row-prefix-box");
-        ObservableList<String> values =
-                FXCollections.observableArrayList("All", "Title", "Author");
-        comboBox.setItems(values);
-        //TODO: Move to CSS stylesheet
-        comboBox.setPrefSize(174,35);
-
-        return comboBox;
-    }
-
 
     public static <T> ComboBox<T> getStyled(String styleName) {
         ComboBox<T> comboBox = new ComboBox();

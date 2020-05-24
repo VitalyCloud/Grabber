@@ -1,4 +1,4 @@
-package com.FileManager;
+package ArxivClient.FileManager;
 
 public class FileDescriber {
     private FileExtension extension;

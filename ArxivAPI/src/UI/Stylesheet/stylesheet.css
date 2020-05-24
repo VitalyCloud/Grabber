@@ -16,6 +16,9 @@
 	-fx-font-size: 22px;
 }
 
+.menu-button:active {
+	-fx-background-color: black;
+}
 /*-----------StatusBar-------------*/
 
 .status-bar {

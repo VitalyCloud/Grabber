@@ -1,6 +1,5 @@
-package com.Network;
+package ArxivClient.Network;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.Proxy;

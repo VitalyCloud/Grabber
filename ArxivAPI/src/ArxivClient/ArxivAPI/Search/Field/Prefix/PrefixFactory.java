@@ -1,4 +1,4 @@
-package com.ArxivAPI.Search.Field.Prefix;
+package ArxivClient.ArxivAPI.Search.Field.Prefix;
 
 public class PrefixFactory {
 

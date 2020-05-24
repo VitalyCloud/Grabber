@@ -1,6 +1,6 @@
-package com;
+package ArxivClient;
 
-import com.Network.DownloadManager;
+import ArxivClient.Network.DownloadManager;
 
 public class Main {
 

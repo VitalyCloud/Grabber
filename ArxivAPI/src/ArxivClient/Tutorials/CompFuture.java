@@ -1,4 +1,4 @@
-package com.Tutorials;
+package ArxivClient.Tutorials;
 
 import java.sql.SQLOutput;
 import java.util.concurrent.CompletableFuture;

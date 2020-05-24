@@ -1,4 +1,4 @@
-package com.ArxivAPI.Article;
+package ArxivClient.ArxivAPI.Article;
 
 public class Author {
     public String name;

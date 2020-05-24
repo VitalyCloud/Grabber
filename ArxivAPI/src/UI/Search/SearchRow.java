@@ -1,5 +1,7 @@
 package UI.Search;
 
+import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
+import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
 import UI.Factories.ButtonFactory;
 import UI.Factories.ComboBoxFactory;
 import UI.Factories.TextFieldFactory;
@@ -14,12 +16,12 @@ public class SearchRow {
     private HBox pane;
 
     private TextField textField;
-    private ComboBox<String> boolFlag;
-    private ComboBox<String> prefix;
+    private ComboBox<BoolFlag> boolFlag;
+    private ComboBox<PrefixID> prefix;
     private Button actionButton;
 
 
-    SearchRow() {
+    public SearchRow() {
         textField = TextFieldFactory.searchFieldOnSearchWindow();
         boolFlag = ComboBoxFactory.boolFlag();
         prefix = ComboBoxFactory.prefixBox();
@@ -34,11 +36,11 @@ public class SearchRow {
         return textField;
     }
 
-    public ComboBox<String> getBoolFlag() {
+    public ComboBox<BoolFlag> getBoolFlag() {
         return boolFlag;
     }
 
-    public ComboBox<String> getPrefix() {
+    public ComboBox<PrefixID> getPrefix() {
         return prefix;
     }
 

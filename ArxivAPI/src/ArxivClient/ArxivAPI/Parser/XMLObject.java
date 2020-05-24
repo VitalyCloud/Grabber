@@ -1,8 +1,8 @@
-package com.ArxivAPI.Parser;
+package ArxivClient.ArxivAPI.Parser;
 
 
 
-import com.ArxivAPI.Parser.XMLObjectExceptions.NodeInitException;
+import ArxivClient.ArxivAPI.Parser.XMLObjectExceptions.NodeInitException;
 import org.w3c.dom.*;
 import java.util.ArrayList;
 

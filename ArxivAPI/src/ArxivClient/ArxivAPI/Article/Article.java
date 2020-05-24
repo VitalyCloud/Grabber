@@ -1,4 +1,4 @@
-package com.ArxivAPI.Article;
+package ArxivClient.ArxivAPI.Article;
 
 import java.util.ArrayList;
 

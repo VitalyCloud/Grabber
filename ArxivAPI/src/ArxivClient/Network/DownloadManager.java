@@ -1,4 +1,4 @@
-package com.Network;
+package ArxivClient.Network;
 import java.util.concurrent.*;
 
 public class DownloadManager {

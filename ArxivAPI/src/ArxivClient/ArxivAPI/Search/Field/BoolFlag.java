@@ -1,8 +1,8 @@
-package com.ArxivAPI.Search.Field;
+package ArxivClient.ArxivAPI.Search.Field;
 
 public enum BoolFlag {
     AND,
     OR,
-    ANDNOT,
+    NOT,
     UNDEFINED //Первый элемент в query
 }

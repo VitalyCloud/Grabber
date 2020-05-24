@@ -1,5 +1,10 @@
 package UI.Search;
 
+import ArxivClient.ArxivAPI.Search.Parameters.MaxResult;
+import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
+import ArxivClient.ArxivAPI.Search.SearchRequest;
+import UI.MainApplication;
+import UI.MainWindow;
 import UI.Stylesheet.StyleSheet;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
@@ -41,8 +46,16 @@ public class SearchWindow  {
     }
 
     private void config() {
-        searchButtonRow.getButton().setVisible(false);
+        searchButtonRow.getButton().setVisible(true);
+        searchButtonRow.getButton().setOnAction(e -> {
+            SearchQuery query = rowKeeper.getSearchQuery();
+            SearchRequest searchRequest = new SearchRequest(query);
+            searchRequest.setMaxResult(new MaxResult(10));
 
+            MainApplication.arxivManager.search(searchRequest,
+                    MainWindow.INSTANCE.getSearchResultWindow().getSearchCompletion());
+            MainWindow.INSTANCE.showSearchResultWindow();
+        });
     }
 
     boolean isConfigured = false;

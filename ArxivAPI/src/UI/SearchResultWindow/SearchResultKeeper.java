@@ -1,20 +1,30 @@
 package UI.SearchResultWindow;
 
+import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.ArxivAPI.Handlers.SearchCompletion;
+import UI.Search.SearchRow;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
 import java.util.ArrayList;
 
 public class SearchResultKeeper {
-    Pane rootPane;
-    ArrayList<SearchResultRow> searchRows;
+    VBox rootPane;
 
-    SearchResultKeeper(Pane pane) {
+    SearchResultKeeper(VBox pane) {
         this.rootPane = pane;
-        searchRows = new ArrayList<>();
+        rootPane.getChildren().add(new SearchResultRow());
+    }
 
-        SearchResultRow first = new SearchResultRow();
-        rootPane.getChildren().add(first);
+    public void setArticles(ArrayList<Article> articles) {
+//        rootPane.getChildren().clear();
 
-        SearchResultRow second = new SearchResultRow();
-        rootPane.getChildren().add(second);
+        System.out.println("Articles size " + articles.size());
+        for (int i=0; i<articles.size(); i++) {
+            SearchResultRow newRow = new SearchResultRow();
+            rootPane.getChildren().add(newRow);
+        }
     }
 }

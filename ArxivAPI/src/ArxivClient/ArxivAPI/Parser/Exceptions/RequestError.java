@@ -1,4 +1,4 @@
-package com.ArxivAPI.Parser.Exceptions;
+package ArxivClient.ArxivAPI.Parser.Exceptions;
 
 public class RequestError extends ParseException {
     public RequestError(String msg) {
