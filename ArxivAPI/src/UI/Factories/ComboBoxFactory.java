@@ -1,7 +1,6 @@
 package UI.Factories;
 
-import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
-import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
+import ArxivClient.ArxivAPI.Field.BoolFlag;
 import UI.Stylesheet.StyleSheet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,9 +1,9 @@
 package UI.Search;
 
-import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
-import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
+import ArxivClient.ArxivAPI.Field.BoolFlag;
 import UI.Factories.ButtonFactory;
 import UI.Factories.ComboBoxFactory;
+import UI.Factories.PrefixID;
 import UI.Factories.TextFieldFactory;
 import UI.Stylesheet.StyleSheet;
 import javafx.scene.control.Button;
