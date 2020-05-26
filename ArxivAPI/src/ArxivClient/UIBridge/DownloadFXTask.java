@@ -1,4 +1,4 @@
-package ArxivClient.Network;
+package ArxivClient.UIBridge;
 
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.Network.Download.DownloadTask;

@@ -9,6 +9,11 @@ public class Prefix {
         setValue(value);
     }
 
+    public Prefix(PrefixID id, String field) {
+        this.prefix = id.name();
+        setValue(field);
+    }
+
     public String getPrefix() { return prefix; }
     public String getValue() { return value; }
 

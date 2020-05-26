@@ -9,20 +9,14 @@ import ArxivClient.FileManager.FileDescriber;
 import ArxivClient.FileManager.FileExtension;
 import ArxivClient.ArxivAPI.ArxivManager;
 import ArxivClient.FileManager.FileManager;
-import ArxivClient.Network.DownloadFXTask;
 import ArxivClient.Network.DownloadManager;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import ArxivClient.UIBridge.DownloadFXTask;
+import ArxivClient.UIBridge.SearchArticleService;
 import javafx.concurrent.Task;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 

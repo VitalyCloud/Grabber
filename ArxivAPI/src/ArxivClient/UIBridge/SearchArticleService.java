@@ -1,4 +1,4 @@
-package ArxivClient;
+package ArxivClient.UIBridge;
 
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.ArxivAPI.ArxivManager;

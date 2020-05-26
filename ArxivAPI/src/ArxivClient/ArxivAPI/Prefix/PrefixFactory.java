@@ -1,5 +1,6 @@
 package ArxivClient.ArxivAPI.Prefix;
 
+@Deprecated
 public class PrefixFactory {
 
     public static Prefix all(String field) {
@@ -38,5 +39,8 @@ public class PrefixFactory {
         return new Prefix("ti", field);
     }
 
+    public static Prefix onId(PrefixID id, String field) {
+        return new Prefix(id, field);
+    }
 
 }
