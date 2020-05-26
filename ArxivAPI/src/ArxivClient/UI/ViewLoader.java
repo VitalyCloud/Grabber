@@ -4,9 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.concurrent.Executor;
 
-public class ViewLoader {
+public class ViewLoader<T> {
     public static final String VIEWS_PATH = "/ArxivClient/UI/View/";
     public static Parent load(String name) {
         Parent root = null;
@@ -22,24 +25,32 @@ public class ViewLoader {
     String fileName;
     Parent parent;
     Exception error;
+    T controller;
 
     public ViewLoader(String fileName) {
-        fxmlLoader = new FXMLLoader();
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource(VIEWS_PATH + fileName));
+            parent = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            error = e;
+        } catch (IOException e) {
+            e.printStackTrace();
+            error = e;
+        }
         this.fileName = fileName;
     }
 
     public Parent getParent() {
-        if(parent==null)
-            try {
-                    parent = fxmlLoader.load(getClass().getResource(VIEWS_PATH + fileName));
-            } catch (Exception ex) {
-                error = ex;
-            }
         return parent;
     }
 
-    public <T> T getController() {
-        return fxmlLoader.getController();
+    public T getController() {
+        return controller;
     }
 
+    public Exception getError() {
+        return error;
+    }
 }

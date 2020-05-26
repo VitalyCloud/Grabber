@@ -3,6 +3,8 @@ package ArxivClient.UI.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UI.SearchView.SearchView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,6 +38,10 @@ public class MainController {
         searchButton.setOnAction(e-> {
             mainPane.setCenter(new SearchView());
         });
+
+        mainPane.setCenter(new ResultView());
+
+        //Неправильно отображение
 
 
     }

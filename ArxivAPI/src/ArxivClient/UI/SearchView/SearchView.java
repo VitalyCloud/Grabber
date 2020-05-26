@@ -1,7 +1,6 @@
 package ArxivClient.UI.SearchView;
 
-import javafx.beans.InvalidationListener;
-import javafx.collections.ListChangeListener;
+import ArxivClient.UI.ResultView.ResultView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,8 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class SearchView extends BorderPane {
 
@@ -22,11 +19,14 @@ public class SearchView extends BorderPane {
 
     Button searchButton;
 
+    ResultView resultView;
+
     public SearchView() {
         paneForRows = new VBox();
         paneForSearchButton = new HBox();
         searchButton = new Button("Search");
         searchRowHandler = new SearchRowHandler(paneForRows);
+        resultView = new ResultView();
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
@@ -49,11 +49,16 @@ public class SearchView extends BorderPane {
         paneForRows.setSpacing(10);
         paneForRows.setPadding(new Insets(10, 10, 10, 10));
 
+        resultView.getReturnButton().setOnAction(e -> {
+            
+
+        });
+
         searchButton.setOnAction(e -> {
             String query = searchRowHandler.getSearchQuery().getAbsoluteString();
             System.out.println(query);
-        });
 
+        });
     }
 
 }
