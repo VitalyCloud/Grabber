@@ -35,11 +35,11 @@ public class MainController {
     @FXML
     void initialize() {
 
-        searchButton.setOnAction(e-> {
-            mainPane.setCenter(new SearchView());
-        });
+//        searchButton.setOnAction(e-> {
+//            mainPane.setCenter(new SearchView());
+//        });
 
-        mainPane.setCenter(new ResultView());
+        mainPane.setCenter(new SearchView());
 
         //Неправильно отображение
 

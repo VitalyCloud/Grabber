@@ -3,26 +3,43 @@ package ArxivClient.UIBridge;
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.ArxivAPI.ArxivManager;
 import ArxivClient.ArxivAPI.SearchRequest;
+import ArxivClient.UI.ResultView.ArticleResultModel;
+import ArxivClient.UI.ResultView.TableResultView;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 import java.util.List;
 
-public class SearchArticleService extends Service<List<Article>> {
+public class SearchArticleService extends Service<ObservableList<ArticleResultModel>> {
 
     ArxivManager arxivManager = new ArxivManager();
     SearchRequest searchRequest;
+    ObservableList<ArticleResultModel> observableList;
+
+    public SearchArticleService(ObservableList<ArticleResultModel> observableList) {
+        this.observableList = observableList;
+    }
 
     @Override
-    protected Task<List<Article>> createTask() {
-        return new Task<List<Article>>() {
+    protected Task<ObservableList<ArticleResultModel>> createTask() {
+        return new Task<ObservableList<ArticleResultModel>>() {
             @Override
-            protected List<Article> call() throws Exception {
+            protected ObservableList<ArticleResultModel> call() throws Exception {
                 if(searchRequest==null) {
                     throw new Exception("Search Request is null");
                 }
+
                 List<Article> result = arxivManager.search(searchRequest).get();
-                return result;
+
+                observableList.clear();
+                result.forEach((article -> {
+                    observableList.add(new ArticleResultModel(article));
+                }));
+
+                return observableList;
             }
         };
     }

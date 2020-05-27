@@ -1,5 +1,6 @@
 package ArxivClient.UI.ResultView;
 
+import ArxivClient.ArxivAPI.Article.Article;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 
@@ -10,12 +11,12 @@ public class ArticleResultModel {
     CheckBox checkBox;
     String author, title;
 
-    ArticleResultModel(String author, String title) {
+    public ArticleResultModel(Article article) {
         progressIndicator = new ProgressIndicator();
         progressIndicator.setProgress(0);
         checkBox = new CheckBox();
-        this.author = author;
-        this.title = title;
+        title = article.getTitle();
+        author = article.getLinkToPDF();
     }
 
     public ProgressIndicator getProgressIndicator() {

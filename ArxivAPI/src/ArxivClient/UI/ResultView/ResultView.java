@@ -1,6 +1,8 @@
 package ArxivClient.UI.ResultView;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,12 +10,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.w3c.dom.Node;
 
 public class ResultView extends BorderPane {
 
     private VBox paneForRows;
-    private HBox paneForSearchButton;
+    private HBox paneForDownloadButton;
     private HBox paneForReturnButton;
 
     private TableResultView tableResultView;
@@ -21,31 +22,37 @@ public class ResultView extends BorderPane {
     private Button downloadButton;
     private Button returnButton;
 
+    private ObservableList<ArticleResultModel> resultModels;
+
+
     public ResultView() {
         paneForRows = new VBox();
-        paneForSearchButton = new HBox();
+        paneForDownloadButton = new HBox();
         paneForReturnButton = new HBox();
         downloadButton = new Button("Download");
         returnButton = new Button("<- Return");
         tableResultView = new TableResultView();
+        resultModels = FXCollections.observableArrayList();
+        tableResultView.setItems(resultModels);
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-        scrollPane.setContent(new TableResultView());
+        scrollPane.setContent(tableResultView);
 
         setCenter(scrollPane);
-        setBottom(paneForSearchButton);
+        setBottom(paneForDownloadButton);
         setTop(paneForReturnButton);
 
         config();
     }
 
+
     public void config() {
-        paneForSearchButton.getChildren().add(downloadButton);
-        paneForSearchButton.setAlignment(Pos.CENTER);
-        paneForSearchButton.setPadding(new Insets(10, 0, 10, 0));
-        paneForSearchButton.setSpacing(10);
+        paneForDownloadButton.getChildren().add(downloadButton);
+        paneForDownloadButton.setAlignment(Pos.CENTER);
+        paneForDownloadButton.setPadding(new Insets(10, 0, 10, 0));
+        paneForDownloadButton.setSpacing(10);
 
         paneForReturnButton.setAlignment(Pos.CENTER_LEFT);
         paneForReturnButton.setPadding(new Insets(5,5,5,10));
@@ -58,5 +65,9 @@ public class ResultView extends BorderPane {
 
     public Button getReturnButton() {
         return returnButton;
+    }
+
+    public ObservableList<ArticleResultModel> getResultModels() {
+        return resultModels;
     }
 }

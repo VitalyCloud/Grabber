@@ -1,6 +1,7 @@
 package ArxivClient.UI.ResultView;
 
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
@@ -28,10 +29,6 @@ public class TableResultView extends TableView<ArticleResultModel> {
         progressColumn.setCellValueFactory(new PropertyValueFactory<>("progressIndicator"));
 
         getColumns().addAll(checkBoxColumn, authorColumn, titleColumn, progressColumn);
-
-        for(int i=0; i<2; i++) {
-            getItems().add(new ArticleResultModel("Check", "Mother"));
-        }
     }
 
 

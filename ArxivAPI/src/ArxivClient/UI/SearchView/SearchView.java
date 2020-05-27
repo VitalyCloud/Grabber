@@ -1,6 +1,7 @@
 package ArxivClient.UI.SearchView;
 
 import ArxivClient.UI.ResultView.ResultView;
+import ArxivClient.UIBridge.SearchArticleService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +20,11 @@ public class SearchView extends BorderPane {
 
     Button searchButton;
 
+    ScrollPane contentPane;
+
+
     ResultView resultView;
+    SearchArticleService searchArticleService;
 
     public SearchView() {
         paneForRows = new VBox();
@@ -27,13 +32,14 @@ public class SearchView extends BorderPane {
         searchButton = new Button("Search");
         searchRowHandler = new SearchRowHandler(paneForRows);
         resultView = new ResultView();
+        searchArticleService = new SearchArticleService(resultView.getResultModels());
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        scrollPane.setContent(paneForRows);
+        contentPane = new ScrollPane();
+        contentPane.setFitToWidth(true);
+        contentPane.setFitToHeight(true);
+        contentPane.setContent(paneForRows);
 
-        setCenter(scrollPane);
+        setCenter(contentPane);
         setBottom(paneForSearchButton);
 
         config();
@@ -50,14 +56,21 @@ public class SearchView extends BorderPane {
         paneForRows.setPadding(new Insets(10, 10, 10, 10));
 
         resultView.getReturnButton().setOnAction(e -> {
-            
-
+            setCenter(contentPane);
         });
+
+
+
 
         searchButton.setOnAction(e -> {
             String query = searchRowHandler.getSearchQuery().getAbsoluteString();
             System.out.println(query);
 
+            searchArticleService.reset();
+            searchArticleService.setSearchRequest(searchRowHandler.getSearchQuery());
+            searchArticleService.start();
+
+            setCenter(resultView);
         });
     }
 
