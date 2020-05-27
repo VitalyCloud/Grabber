@@ -85,13 +85,12 @@ public class SearchView extends BorderPane {
     }
 
     private void showResultView(boolean flag) {
-        //TODO: после поиска и возвращения обратно, нижняя панель при большом количестве строк поиска уходит вниз
         if(flag) {
             setCenter(resultView);
             int searchIndex = paneForBottom.getChildren().indexOf(searchButton);
             paneForBottom.getChildren().set(searchIndex, downloadButton);
         } else {
-            setCenter(paneForRows);
+            setCenter(contentPane);
             int downloadIndex = paneForBottom.getChildren().indexOf(downloadButton);
             paneForBottom.getChildren().set(downloadIndex, searchButton);
         }
