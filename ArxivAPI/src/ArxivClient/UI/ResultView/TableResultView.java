@@ -1,7 +1,5 @@
 package ArxivClient.UI.ResultView;
 
-
-import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
@@ -49,9 +47,6 @@ public class TableResultView extends TableView<ArticleResultModel> {
         journalRefsColumn = new TableResultColumn("journalRefs", "journalRefs");
         commentColumn = new TableResultColumn("comment", "comment");
         doiColumn = new TableResultColumn("doi", "doi");
-
-
-
 
         getColumns().addAll(checkBoxColumn, progressColumn, idColumn, lastUpdatedColumn, titleColumn,
                 publishedColumn, summaryColumn, authorsColumn, categoriesColumn, linkToDOIColumn,

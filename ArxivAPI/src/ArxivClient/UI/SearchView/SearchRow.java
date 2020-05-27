@@ -11,7 +11,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-import java.util.Collections;
 
 
 public class SearchRow extends HBox {
@@ -23,12 +22,12 @@ public class SearchRow extends HBox {
 
 
     public SearchRow() {
-
         textField = new TextField();
         boolFlagBox = new ComboBox<>();
         prefixBox = new ComboBox<>();
         actionButton = new Button("+");
-        config();
+
+        configViewStyle();
     }
 
     public boolean setActionButtonState(boolean state) {
@@ -37,7 +36,7 @@ public class SearchRow extends HBox {
         return currentState;
     }
 
-    private void config() {
+    private void configViewStyle() {
         HBox paneForSearch = new HBox();
         paneForSearch.getChildren().addAll(textField, prefixBox, actionButton);
         getChildren().addAll(boolFlagBox, paneForSearch);

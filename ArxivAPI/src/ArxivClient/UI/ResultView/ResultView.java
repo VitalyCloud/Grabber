@@ -14,46 +14,34 @@ import javafx.scene.layout.VBox;
 public class ResultView extends BorderPane {
 
     private VBox paneForRows;
-    private HBox paneForDownloadButton;
     private HBox paneForReturnButton;
+    private ScrollPane contentPane;
 
     private TableResultView tableResultView;
 
-    private Button downloadButton;
     private Button returnButton;
 
     private ObservableList<ArticleResultModel> resultModels;
 
-
     public ResultView() {
         paneForRows = new VBox();
-        paneForDownloadButton = new HBox();
         paneForReturnButton = new HBox();
-        downloadButton = new Button("Download");
         returnButton = new Button("<- Return");
         tableResultView = new TableResultView();
         resultModels = FXCollections.observableArrayList();
         tableResultView.setItems(resultModels);
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        scrollPane.setContent(tableResultView);
+        contentPane = new ScrollPane();
+        contentPane.setContent(tableResultView);
 
-        setCenter(scrollPane);
-//        setBottom(paneForDownloadButton);
+        setCenter(contentPane);
         setTop(paneForReturnButton);
 
-        config();
+        configViewStyle();
     }
 
 
-    public void config() {
-        paneForDownloadButton.getChildren().add(downloadButton);
-        paneForDownloadButton.setAlignment(Pos.CENTER);
-        paneForDownloadButton.setPadding(new Insets(10, 0, 10, 0));
-        paneForDownloadButton.setSpacing(10);
-
+    public void configViewStyle() {
         paneForReturnButton.setAlignment(Pos.CENTER_LEFT);
         paneForReturnButton.setPadding(new Insets(5,5,5,10));
         paneForReturnButton.getChildren().add(returnButton);
@@ -61,6 +49,9 @@ public class ResultView extends BorderPane {
         paneForRows.setAlignment(Pos.TOP_CENTER);
         paneForRows.setSpacing(10);
         paneForRows.setPadding(new Insets(10, 10, 10, 10));
+
+        contentPane.setFitToWidth(true);
+        contentPane.setFitToHeight(true);
     }
 
     public Button getReturnButton() {
