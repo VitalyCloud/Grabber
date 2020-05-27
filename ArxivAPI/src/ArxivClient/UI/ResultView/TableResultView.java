@@ -12,26 +12,66 @@ public class TableResultView extends TableView<ArticleResultModel> {
 
 
     private TableColumn<ArticleResultModel, ProgressIndicator> progressColumn;
-    private TableColumn<ArticleResultModel, String> authorColumn;
-    private TableColumn<ArticleResultModel, String> titleColumn;
     private TableColumn<ArticleResultModel, CheckBox> checkBoxColumn;
 
+    private TableResultColumn idColumn;
+    private TableResultColumn lastUpdatedColumn;
+    private TableResultColumn titleColumn;
+    private TableResultColumn publishedColumn;
+    private TableResultColumn summaryColumn;
+    private TableResultColumn authorsColumn;
+    private TableResultColumn categoriesColumn;
+    private TableResultColumn linkToWebSiteColumn;
+    private TableResultColumn linkToPDFColumn;
+    private TableResultColumn linkToDOIColumn;
+    private TableResultColumn primaryCategoryColumn;
+    private TableResultColumn journalRefsColumn;
+    private TableResultColumn commentColumn;
+    private TableResultColumn doiColumn;
+
     public TableResultView() {
-
         progressColumn = new TableColumn<>();
-        authorColumn = new TableColumn<>("Author");
-        titleColumn = new TableColumn<>("Title");
         checkBoxColumn = new TableColumn<>();
-
         checkBoxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         progressColumn.setCellValueFactory(new PropertyValueFactory<>("progressIndicator"));
 
-        getColumns().addAll(checkBoxColumn, authorColumn, titleColumn, progressColumn);
+        idColumn = new TableResultColumn("id", "id");
+        lastUpdatedColumn = new TableResultColumn("lastUpdated", "lastUpdated");
+        titleColumn = new TableResultColumn("title", "title");
+        publishedColumn = new TableResultColumn("published", "published");
+        summaryColumn = new TableResultColumn("summary", "summary");
+        authorsColumn = new TableResultColumn("authors", "authorsAsString");
+        categoriesColumn = new TableResultColumn("categories", "categoriesAsString");
+        linkToWebSiteColumn = new TableResultColumn("linkToWebSite", "linkToWebSite");
+        linkToPDFColumn = new TableResultColumn("linkToPDF", "linkToPDF");
+        linkToDOIColumn = new TableResultColumn("linkToDOI", "linkToDOI");
+        primaryCategoryColumn = new TableResultColumn("primaryCategory", "primaryCategory");
+        journalRefsColumn = new TableResultColumn("journalRefs", "journalRefs");
+        commentColumn = new TableResultColumn("comment", "comment");
+        doiColumn = new TableResultColumn("doi", "doi");
+
+
+
+
+        getColumns().addAll(checkBoxColumn, progressColumn, idColumn, lastUpdatedColumn, titleColumn,
+                publishedColumn, summaryColumn, authorsColumn, categoriesColumn, linkToDOIColumn,
+                linkToPDFColumn, linkToWebSiteColumn, primaryCategoryColumn, journalRefsColumn, commentColumn,
+                doiColumn);
+
+        idColumn.setVisible(false);
+        lastUpdatedColumn.setVisible(false);
+        summaryColumn.setVisible(false);
+        linkToDOIColumn.setVisible(false);
+        journalRefsColumn.setVisible(false);
+        commentColumn.setVisible(false);
+        doiColumn.setVisible(false);
     }
 
-
-
+    static class TableResultColumn extends TableColumn<ArticleResultModel, String> {
+        public TableResultColumn(String title, String binding) {
+            super(title);
+            setCellValueFactory(new PropertyValueFactory<>(binding));
+        }
+    }
 
 }

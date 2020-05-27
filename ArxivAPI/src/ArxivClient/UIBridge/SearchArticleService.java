@@ -36,8 +36,11 @@ public class SearchArticleService extends Service<ObservableList<ArticleResultMo
 
                 observableList.clear();
                 result.forEach((article -> {
-                    observableList.add(new ArticleResultModel(article));
+                    ArticleResultModel articleResultModel = new ArticleResultModel(article);
+                    observableList.add(articleResultModel);
                 }));
+
+                System.out.println(observableList.size());
 
                 return observableList;
             }

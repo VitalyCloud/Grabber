@@ -4,19 +4,24 @@ import ArxivClient.ArxivAPI.Article.Article;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 
-import javax.swing.table.TableColumn;
 
-public class ArticleResultModel {
+
+public class ArticleResultModel extends Article {
     ProgressIndicator progressIndicator;
     CheckBox checkBox;
-    String author, title;
+
+    String authorsAsString, categoriesAsString, journalRefsAsString;
+
 
     public ArticleResultModel(Article article) {
+        super(article);
+        setAuthorsAsString(article.getAuthors().toString());
+        setCategoriesAsString(article.getCategories().toString());
+        setJournalRefsAsString(article.getCategories().toString());
+
         progressIndicator = new ProgressIndicator();
         progressIndicator.setProgress(0);
         checkBox = new CheckBox();
-        title = article.getTitle();
-        author = article.getLinkToPDF();
     }
 
     public ProgressIndicator getProgressIndicator() {
@@ -35,19 +40,27 @@ public class ArticleResultModel {
         this.checkBox = checkBox;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorsAsString() {
+        return authorsAsString;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorsAsString(String authorsAsString) {
+        this.authorsAsString = authorsAsString;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategoriesAsString() {
+        return categoriesAsString;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCategoriesAsString(String categoriesAsString) {
+        this.categoriesAsString = categoriesAsString;
+    }
+
+    public String getJournalRefsAsString() {
+        return journalRefsAsString;
+    }
+
+    public void setJournalRefsAsString(String journalRefsAsString) {
+        this.journalRefsAsString = journalRefsAsString;
     }
 }

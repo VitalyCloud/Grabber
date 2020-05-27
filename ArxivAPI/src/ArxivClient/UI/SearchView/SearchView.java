@@ -68,6 +68,10 @@ public class SearchView extends BorderPane {
 
             showResultView(true);
         });
+
+        searchArticleService.setOnFailed(e -> {
+            searchArticleService.getException().printStackTrace();
+        });
     }
 
     public void configViewStyle() {
