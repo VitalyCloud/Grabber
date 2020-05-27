@@ -41,7 +41,7 @@ public class ResultView extends BorderPane {
         scrollPane.setContent(tableResultView);
 
         setCenter(scrollPane);
-        setBottom(paneForDownloadButton);
+//        setBottom(paneForDownloadButton);
         setTop(paneForReturnButton);
 
         config();

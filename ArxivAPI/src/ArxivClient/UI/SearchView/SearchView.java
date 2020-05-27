@@ -14,11 +14,12 @@ import javafx.scene.layout.VBox;
 public class SearchView extends BorderPane {
 
     VBox paneForRows;
-    HBox paneForSearchButton;
+    HBox paneForBottom;
 
     SearchRowHandler searchRowHandler;
 
     Button searchButton;
+    Button downloadButton;
 
     ScrollPane contentPane;
 
@@ -28,8 +29,9 @@ public class SearchView extends BorderPane {
 
     public SearchView() {
         paneForRows = new VBox();
-        paneForSearchButton = new HBox();
+        paneForBottom = new HBox();
         searchButton = new Button("Search");
+        downloadButton = new Button("Download");
         searchRowHandler = new SearchRowHandler(paneForRows);
         resultView = new ResultView();
         searchArticleService = new SearchArticleService(resultView.getResultModels());
@@ -40,38 +42,55 @@ public class SearchView extends BorderPane {
         contentPane.setContent(paneForRows);
 
         setCenter(contentPane);
-        setBottom(paneForSearchButton);
+        setBottom(paneForBottom);
 
-        config();
+        configViewStyle();
+        configLogic();
     }
 
-    public void config() {
-        paneForSearchButton.getChildren().add(searchButton);
-        paneForSearchButton.setAlignment(Pos.CENTER);
-        paneForSearchButton.setPadding(new Insets(10, 0, 10, 0));
-        paneForSearchButton.setSpacing(10);
+    public void configLogic() {
+        paneForBottom.getChildren().add(searchButton);
+
+        //Венутсья к экрану поиска
+        resultView.getReturnButton().setOnAction(e -> {
+            showResultView(false);
+        });
+
+
+        //Выполнить поиск
+        searchButton.setOnAction(e -> {
+            String query = searchRowHandler.getSearchRequest().getAbsoluteString();
+            System.out.println(query);
+
+            searchArticleService.reset();
+            searchArticleService.setSearchRequest(searchRowHandler.getSearchRequest());
+            searchArticleService.start();
+
+            showResultView(true);
+        });
+    }
+
+    public void configViewStyle() {
+        paneForBottom.setAlignment(Pos.CENTER);
+        paneForBottom.setPadding(new Insets(10, 0, 10, 0));
+        paneForBottom.setSpacing(10);
 
         paneForRows.setAlignment(Pos.TOP_CENTER);
         paneForRows.setSpacing(10);
         paneForRows.setPadding(new Insets(10, 10, 10, 10));
+    }
 
-        resultView.getReturnButton().setOnAction(e -> {
-            setCenter(contentPane);
-        });
-
-
-
-
-        searchButton.setOnAction(e -> {
-            String query = searchRowHandler.getSearchQuery().getAbsoluteString();
-            System.out.println(query);
-
-            searchArticleService.reset();
-            searchArticleService.setSearchRequest(searchRowHandler.getSearchQuery());
-            searchArticleService.start();
-
+    private void showResultView(boolean flag) {
+        //TODO: после поиска и возвращения обратно, нижняя панель при большом количестве строк поиска уходит вниз
+        if(flag) {
             setCenter(resultView);
-        });
+            int searchIndex = paneForBottom.getChildren().indexOf(searchButton);
+            paneForBottom.getChildren().set(searchIndex, downloadButton);
+        } else {
+            setCenter(paneForRows);
+            int downloadIndex = paneForBottom.getChildren().indexOf(downloadButton);
+            paneForBottom.getChildren().set(downloadIndex, searchButton);
+        }
     }
 
 }

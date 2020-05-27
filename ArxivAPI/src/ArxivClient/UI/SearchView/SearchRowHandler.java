@@ -5,13 +5,10 @@ import ArxivClient.ArxivAPI.Field.SearchField;
 import ArxivClient.ArxivAPI.Prefix.Prefix;
 import ArxivClient.ArxivAPI.Prefix.PrefixID;
 import ArxivClient.ArxivAPI.SearchRequest;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchRowHandler {
 
@@ -31,7 +28,7 @@ public class SearchRowHandler {
         firstRow.getBoolFlagBox().setVisible(false);
     }
 
-    public SearchRequest getSearchQuery() {
+    public SearchRequest getSearchRequest() {
         SearchField field = new SearchField();
         searchRows.forEach( searchRow -> {
             String text = searchRow.getTextField().getText();
@@ -50,11 +47,11 @@ public class SearchRowHandler {
             SearchRow searchRow = new SearchRow();
             searchRow.getActionButton().setOnAction(e -> addRow(searchRow));
             pane.getChildren().add(searchRow);
-            searchRows.add(searchRow); //TODO: test this
+            searchRows.add(searchRow);
             caller.setActionButtonState(false);
         } else {
             pane.getChildren().remove(caller);
-            searchRows.remove(caller); //TODO: test this
+            searchRows.remove(caller);
         }
 
         hideBoolAtFirstRow();

@@ -1,4 +1,4 @@
-package ArxivClient.UI.Controller;
+package ArxivClient.UI.MainView;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.Executor;
 
 public class ViewLoader<T> {
-    public static final String VIEWS_PATH = "/ArxivClient/UI/View/";
+    public static final String VIEWS_PATH = "/ArxivClient/UI/MainView/";
     public static Parent load(String name) {
         Parent root = null;
         try {
