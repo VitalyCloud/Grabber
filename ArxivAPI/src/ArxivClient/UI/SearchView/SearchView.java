@@ -83,7 +83,7 @@ public class SearchView extends BorderPane {
 
 
         addButton.setOnAction(e -> {
-            ObservableList<ArticleResultModel> listInResult = resultView.getResultModels();
+            ObservableList<ArticleResultModel> listInResult = getListInResults();
             ObservableList<ArticleResultModel> listInDownloads = MainController.getDownloadView().getArticleResultModels();
             listInResult.forEach((article) -> {
                 if(article.getCheckBox().isSelected()) {
@@ -121,6 +121,10 @@ public class SearchView extends BorderPane {
             int downloadIndex = paneForBottom.getChildren().indexOf(addButton);
             paneForBottom.getChildren().set(downloadIndex, searchButton);
         }
+    }
+
+    public ObservableList<ArticleResultModel> getListInResults() {
+        return resultView.getResultModels();
     }
 
 }

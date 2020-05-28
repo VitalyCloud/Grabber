@@ -1,6 +1,7 @@
 package ArxivClient.UI.DownloadView;
 
 import ArxivClient.Network.DownloadManager;
+import ArxivClient.UI.MainView.MainController;
 import ArxivClient.UI.ResultView.ArticleResultModel;
 import ArxivClient.UI.ResultView.TableResultView;
 import ArxivClient.UIBridge.DownloadFXTask;
@@ -145,11 +146,19 @@ public class DownloadView extends BorderPane {
     }
 
     private void cancelButtonPressed() {
+        ObservableList<ArticleResultModel> listInResults = MainController.getSearchView().getListInResults();
         for (int i=0; i<articleResultModels.size(); i++) {
             ArticleResultModel model = articleResultModels.get(i);
             if(model.getCheckBox().isSelected()) {
                 articleResultModels.remove(model);
                 model.cancelDownloadTask();
+
+                int index = listInResults.indexOf(model);
+                if(index!=-1) {
+                    listInResults.get(index).getCheckBox().setVisible(true);
+                    listInResults.get(index).getCheckBox().setSelected(false);
+                }
+
             }
 
         }
