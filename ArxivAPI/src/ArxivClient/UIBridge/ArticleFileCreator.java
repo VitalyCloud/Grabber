@@ -7,7 +7,6 @@ import ArxivClient.FileManager.FileManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 
 public class ArticleFileCreator {
 

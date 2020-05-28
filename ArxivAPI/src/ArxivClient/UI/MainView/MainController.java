@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 import ArxivClient.UI.DownloadView.DownloadView;
 import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UI.SearchView.SearchView;
+import ArxivClient.UI.ViewLoader;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
@@ -34,6 +36,7 @@ public class MainController {
 
     private static SearchView searchView;
     private static DownloadView downloadView;
+    private Parent settingsView;
 
 
     @FXML
@@ -41,6 +44,7 @@ public class MainController {
 
         searchView = new SearchView();
         downloadView = new DownloadView();
+        settingsView = ViewLoader.load("SettingsView.fxml");
 
         searchButton.setOnAction(e-> {
             mainPane.setCenter(searchView);
@@ -48,6 +52,10 @@ public class MainController {
 
         downloadsButton.setOnAction(e-> {
             mainPane.setCenter(downloadView);
+        });
+
+        settingsButton.setOnAction(e -> {
+            mainPane.setCenter(settingsView);
         });
 
         mainPane.setCenter(searchView);

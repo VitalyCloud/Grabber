@@ -86,7 +86,6 @@ public class DownloadView extends BorderPane {
     private void downloadButtonPressed() {
         articleResultModels.forEach((model) -> {
             if(model.getCheckBox().isSelected()) {
-//                model.getProgressIndicator().setVisible(true);
 
                 DownloadFXTask downloadFXTask = model.createDownloadTask();
 
