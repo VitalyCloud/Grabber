@@ -1,7 +1,12 @@
 package ArxivClient.UI.SearchView;
 
+import ArxivClient.ArxivAPI.Parameters.MaxResult;
+import ArxivClient.ArxivAPI.SearchRequest;
+import ArxivClient.UI.MainView.MainController;
+import ArxivClient.UI.ResultView.ArticleResultModel;
 import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UIBridge.SearchArticleService;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +24,7 @@ public class SearchView extends BorderPane {
     SearchRowHandler searchRowHandler;
 
     Button searchButton;
-    Button downloadButton;
+    Button addButton;
 
     ScrollPane contentPane;
 
@@ -31,7 +36,7 @@ public class SearchView extends BorderPane {
         paneForRows = new VBox();
         paneForBottom = new HBox();
         searchButton = new Button("Search");
-        downloadButton = new Button("Download");
+        addButton = new Button("Add");
         searchRowHandler = new SearchRowHandler(paneForRows);
         resultView = new ResultView();
         searchArticleService = new SearchArticleService(resultView.getResultModels());
@@ -62,8 +67,11 @@ public class SearchView extends BorderPane {
             String query = searchRowHandler.getSearchRequest().getAbsoluteString();
             System.out.println(query);
 
+            SearchRequest searchRequest = searchRowHandler.getSearchRequest();
+            searchRequest.setMaxResult(new MaxResult(10));
+
             searchArticleService.reset();
-            searchArticleService.setSearchRequest(searchRowHandler.getSearchRequest());
+            searchArticleService.setSearchRequest(searchRequest);
             searchArticleService.start();
 
             showResultView(true);
@@ -71,6 +79,25 @@ public class SearchView extends BorderPane {
 
         searchArticleService.setOnFailed(e -> {
             searchArticleService.getException().printStackTrace();
+        });
+
+
+        addButton.setOnAction(e -> {
+            ObservableList<ArticleResultModel> listInResult = resultView.getResultModels();
+            ObservableList<ArticleResultModel> listInDownloads = MainController.getDownloadView().getArticleResultModels();
+            listInResult.forEach((article) -> {
+                if(article.getCheckBox().isSelected()) {
+                    if(listInDownloads.indexOf(article) == -1) {
+                        ArticleResultModel articleToDownload = new ArticleResultModel(article);
+                        MainController.getDownloadView().addArticle(articleToDownload);
+                        article.getCheckBox().setVisible(false);
+                    } else {
+                        //TODO:: Fix this
+                        article.getCheckBox().setVisible(false);
+                    }
+                }
+            });
+
         });
     }
 
@@ -88,10 +115,10 @@ public class SearchView extends BorderPane {
         if(flag) {
             setCenter(resultView);
             int searchIndex = paneForBottom.getChildren().indexOf(searchButton);
-            paneForBottom.getChildren().set(searchIndex, downloadButton);
+            paneForBottom.getChildren().set(searchIndex, addButton);
         } else {
             setCenter(contentPane);
-            int downloadIndex = paneForBottom.getChildren().indexOf(downloadButton);
+            int downloadIndex = paneForBottom.getChildren().indexOf(addButton);
             paneForBottom.getChildren().set(downloadIndex, searchButton);
         }
     }

@@ -1,6 +1,7 @@
 package ArxivClient.ArxivAPI.Article;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Article {
 
@@ -104,6 +105,19 @@ public class Article {
         System.out.println("journalRefs: ");
         journalRefs.forEach((element) -> System.out.println("\t" + element));
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return id.equals(article.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public String getId() {

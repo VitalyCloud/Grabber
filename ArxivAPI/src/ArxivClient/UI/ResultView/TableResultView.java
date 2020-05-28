@@ -60,6 +60,7 @@ public class TableResultView extends TableView<ArticleResultModel> {
         journalRefsColumn.setVisible(false);
         commentColumn.setVisible(false);
         doiColumn.setVisible(false);
+        progressColumn.setVisible(false);
     }
 
     static class TableResultColumn extends TableColumn<ArticleResultModel, String> {
@@ -69,4 +70,67 @@ public class TableResultView extends TableView<ArticleResultModel> {
         }
     }
 
+    public TableColumn<ArticleResultModel, ProgressIndicator> getProgressColumn() {
+        return progressColumn;
+    }
+
+    public TableColumn<ArticleResultModel, CheckBox> getCheckBoxColumn() {
+        return checkBoxColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getIdColumn() {
+        return idColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getLastUpdatedColumn() {
+        return lastUpdatedColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getTitleColumn() {
+        return titleColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getPublishedColumn() {
+        return publishedColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getSummaryColumn() {
+        return summaryColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getAuthorsColumn() {
+        return authorsColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getCategoriesColumn() {
+        return categoriesColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getLinkToWebSiteColumn() {
+        return linkToWebSiteColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getLinkToPDFColumn() {
+        return linkToPDFColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getLinkToDOIColumn() {
+        return linkToDOIColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getPrimaryCategoryColumn() {
+        return primaryCategoryColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getJournalRefsColumn() {
+        return journalRefsColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getCommentColumn() {
+        return commentColumn;
+    }
+
+    public TableColumn<ArticleResultModel, String> getDoiColumn() {
+        return doiColumn;
+    }
 }

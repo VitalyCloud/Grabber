@@ -1,9 +1,11 @@
 package ArxivClient.UI.ResultView;
 
 import ArxivClient.ArxivAPI.Article.Article;
+import ArxivClient.UIBridge.DownloadFXTask;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 
+import java.util.Comparator;
 
 
 public class ArticleResultModel extends Article {
@@ -63,4 +65,25 @@ public class ArticleResultModel extends Article {
     public void setJournalRefsAsString(String journalRefsAsString) {
         this.journalRefsAsString = journalRefsAsString;
     }
+
+    //test code
+
+    DownloadFXTask downloadFXTask;
+    public DownloadFXTask createDownloadTask() {
+        downloadFXTask = new DownloadFXTask(this);
+        this.getProgressIndicator().progressProperty().bind(downloadFXTask.progressProperty());
+        return downloadFXTask;
+    }
+
+    public void cancelDownloadTask() {
+        if(downloadFXTask!=null) {
+            downloadFXTask.cancel();
+            downloadFXTask = null;
+        }
+    }
+
+    public boolean downloadIsRunning() {
+        return downloadFXTask!=null ? downloadFXTask.isRunning() : false;
+    }
+
 }

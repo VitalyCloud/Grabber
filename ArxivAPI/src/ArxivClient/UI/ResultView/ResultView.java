@@ -2,6 +2,7 @@ package ArxivClient.UI.ResultView;
 
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +14,6 @@ import javafx.scene.layout.VBox;
 
 public class ResultView extends BorderPane {
 
-    private VBox paneForRows;
     private HBox paneForReturnButton;
     private ScrollPane contentPane;
 
@@ -24,7 +24,6 @@ public class ResultView extends BorderPane {
     private ObservableList<ArticleResultModel> resultModels;
 
     public ResultView() {
-        paneForRows = new VBox();
         paneForReturnButton = new HBox();
         returnButton = new Button("<- Return");
         tableResultView = new TableResultView();
@@ -45,10 +44,6 @@ public class ResultView extends BorderPane {
         paneForReturnButton.setAlignment(Pos.CENTER_LEFT);
         paneForReturnButton.setPadding(new Insets(5,5,5,10));
         paneForReturnButton.getChildren().add(returnButton);
-
-        paneForRows.setAlignment(Pos.TOP_CENTER);
-        paneForRows.setSpacing(10);
-        paneForRows.setPadding(new Insets(10, 10, 10, 10));
 
         contentPane.setFitToWidth(true);
         contentPane.setFitToHeight(true);

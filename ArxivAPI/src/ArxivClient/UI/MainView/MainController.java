@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+import ArxivClient.UI.DownloadView.DownloadView;
 import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UI.SearchView.SearchView;
 import javafx.fxml.FXML;
@@ -31,18 +32,32 @@ public class MainController {
     @FXML
     private Button settingsButton;
 
+    private static SearchView searchView;
+    private static DownloadView downloadView;
+
 
     @FXML
     void initialize() {
 
-//        searchButton.setOnAction(e-> {
-//            mainPane.setCenter(new SearchView());
-//        });
+        searchView = new SearchView();
+        downloadView = new DownloadView();
 
-        mainPane.setCenter(new SearchView());
+        searchButton.setOnAction(e-> {
+            mainPane.setCenter(searchView);
+        });
 
-        //Неправильно отображение
+        downloadsButton.setOnAction(e-> {
+            mainPane.setCenter(downloadView);
+        });
 
+        mainPane.setCenter(searchView);
+    }
 
+    public static DownloadView getDownloadView() {
+        return downloadView;
+    }
+
+    public static SearchView getSearchView() {
+        return searchView;
     }
 }

@@ -3,10 +3,8 @@ package ArxivClient.UIBridge;
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.ArxivAPI.ArxivManager;
 import ArxivClient.ArxivAPI.SearchRequest;
+import ArxivClient.UI.MainView.MainController;
 import ArxivClient.UI.ResultView.ArticleResultModel;
-import ArxivClient.UI.ResultView.TableResultView;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -37,6 +35,14 @@ public class SearchArticleService extends Service<ObservableList<ArticleResultMo
                 observableList.clear();
                 result.forEach((article -> {
                     ArticleResultModel articleResultModel = new ArticleResultModel(article);
+
+                    //TODO: Fix this
+                    int index = MainController.getDownloadView().getArticleResultModels().indexOf(articleResultModel);
+                    if(index!=-1) {
+                        articleResultModel.getCheckBox().setVisible(false);
+                    }
+                    // --------------------------------------------------------------------
+
                     observableList.add(articleResultModel);
                 }));
 

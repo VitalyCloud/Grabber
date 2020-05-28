@@ -1,0 +1,157 @@
+package ArxivClient.UI.DownloadView;
+
+import ArxivClient.Network.DownloadManager;
+import ArxivClient.UI.ResultView.ArticleResultModel;
+import ArxivClient.UI.ResultView.TableResultView;
+import ArxivClient.UIBridge.DownloadFXTask;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+
+
+public class DownloadView extends BorderPane {
+
+    private TableResultView tableResultView;
+    private ScrollPane contentPane;
+    private HBox paneForDownloadButton;
+    private Button downloadButton;
+    private Button cancelButton;
+
+    private ObservableList<ArticleResultModel> articleResultModels;
+
+    public DownloadView() {
+        tableResultView = new TableResultView();
+        contentPane = new ScrollPane();
+        paneForDownloadButton = new HBox();
+        downloadButton = new Button("Dwonload");
+        cancelButton = new Button("Cancel");
+        articleResultModels = FXCollections.observableArrayList();
+        tableResultView.setItems(articleResultModels);
+
+        paneForDownloadButton.getChildren().add(downloadButton);
+        paneForDownloadButton.getChildren().add(cancelButton);
+
+        contentPane.setContent(tableResultView);
+
+        setCenter(contentPane);
+        setBottom(paneForDownloadButton);
+        configViewStyle();
+        configLogic();
+    }
+
+    private void configLogic() {
+        downloadButton.setOnAction(e -> {
+            System.out.println("Download button pressed");
+            downloadButtonPressed();
+        });
+
+        cancelButton.setOnAction(e -> {
+            System.out.println("Cancel button pressed");
+            cancelButtonPressed();
+        });
+    }
+
+    private void configViewStyle() {
+        paneForDownloadButton.setAlignment(Pos.CENTER);
+        paneForDownloadButton.setPadding(new Insets(10, 0, 10, 0));
+        paneForDownloadButton.setSpacing(10);
+
+        contentPane.setFitToWidth(true);
+        contentPane.setFitToHeight(true);
+
+        tableResultView.getProgressColumn().setVisible(true);
+    }
+
+    public void addArticle(ArticleResultModel article) {
+        article.getCheckBox().setSelected(true);
+        article.getProgressIndicator().setVisible(false);
+        articleResultModels.add(article);
+    }
+
+    public ObservableList<ArticleResultModel> getArticleResultModels() {
+        return articleResultModels;
+    }
+
+
+    static boolean alertIsShowing = false;
+
+    private void downloadButtonPressed() {
+        articleResultModels.forEach((model) -> {
+            if(model.getCheckBox().isSelected()) {
+//                model.getProgressIndicator().setVisible(true);
+
+                DownloadFXTask downloadFXTask = model.createDownloadTask();
+
+                DownloadManager.setPoolSize(3);
+
+                DownloadManager.downloadNow(downloadFXTask);
+
+                downloadFXTask.setOnRunning(e -> {
+                    Platform.runLater(() -> {
+                        model.getProgressIndicator().setVisible(true);
+                        model.getCheckBox().setSelected(false);
+                        model.getCheckBox().setVisible(true);
+                    });
+                });
+
+                downloadFXTask.setOnFailed(e -> {
+                    Platform.runLater(() -> {
+                        model.getCheckBox().setVisible(true);
+                        model.getCheckBox().setSelected(false);
+                        model.getProgressIndicator().setVisible(false);
+                    });
+                    System.out.println("Failed \n" + model.getTitle());
+                    downloadFXTask.getException().printStackTrace();
+
+
+                    if(alertIsShowing==false) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error while downloading");
+                        alert.setContentText(downloadFXTask.getException().getMessage());
+                        alertIsShowing = true;
+                        alert.showAndWait();
+                        alertIsShowing = false;
+                    }
+
+
+                });
+
+                downloadFXTask.setOnSucceeded(e -> {
+                    System.out.println("Success " + model.getTitle());
+                    Platform.runLater(() -> {
+                        model.getCheckBox().setVisible(false);
+                        model.getCheckBox().setSelected(false);
+                    });
+                });
+
+                downloadFXTask.setOnCancelled(e -> {
+                    model.cancelDownloadTask();
+                    Platform.runLater(() -> {
+                        articleResultModels.remove(model);
+                    });
+                });
+
+                model.getCheckBox().setVisible(false);
+                model.getCheckBox().setSelected(false);
+            }
+        });
+    }
+
+    private void cancelButtonPressed() {
+        for (int i=0; i<articleResultModels.size(); i++) {
+            ArticleResultModel model = articleResultModels.get(i);
+            if(model.getCheckBox().isSelected()) {
+                articleResultModels.remove(model);
+                model.cancelDownloadTask();
+            }
+
+        }
+    }
+}
