@@ -1,5 +1,6 @@
 package ArxivClient.UIBridge;
 
+import ArxivClient.Application;
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.FileManager.FileDescriber;
 import ArxivClient.FileManager.FileExtension;
@@ -10,10 +11,11 @@ import java.io.IOException;
 
 public class ArticleFileCreator {
 
-    private static String directory = "C:\\dev\\Grabber\\Downlaods\\";
+    private static String directory = "";
 
     public ArticleFileCreator() {
-
+        String directory = Application.getPreferences().get("downloadDirectory", "");
+        updateDirectory(directory);
     }
 
     public ArticleFileCreator(String directory) {
@@ -42,5 +44,10 @@ public class ArticleFileCreator {
 
         outFile = FileManager.createNewFile(fileDescriber, true);
         return outFile;
+    }
+
+    public static void updateDirectory(String path) {
+        path.replaceFirst(";", File.pathSeparator);
+        directory = path;
     }
 }

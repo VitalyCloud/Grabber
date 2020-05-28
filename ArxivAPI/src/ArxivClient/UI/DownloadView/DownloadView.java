@@ -1,5 +1,6 @@
 package ArxivClient.UI.DownloadView;
 
+import ArxivClient.Application;
 import ArxivClient.Network.DownloadManager;
 import ArxivClient.UI.MainView.MainController;
 import ArxivClient.UI.ResultView.ArticleResultModel;
@@ -16,8 +17,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+
 
 public class DownloadView extends BorderPane {
+
+    private static int downloadDelay;
 
     private TableResultView tableResultView;
     private ScrollPane contentPane;
@@ -45,6 +52,9 @@ public class DownloadView extends BorderPane {
         setBottom(paneForDownloadButton);
         configViewStyle();
         configLogic();
+
+        String downloadDelay = Application.getPreferences().get("downloadDelay","0");
+        setDownloadDelay(downloadDelay);
     }
 
     private void configLogic() {
@@ -85,13 +95,15 @@ public class DownloadView extends BorderPane {
 
     private void downloadButtonPressed() {
         articleResultModels.forEach((model) -> {
-            if(model.getCheckBox().isSelected()) {
+            if(model.getCheckBox().isSelected() && !model.downloadIsRunning()) {
 
                 DownloadFXTask downloadFXTask = model.createDownloadTask();
-
                 DownloadManager.setPoolSize(3);
 
-                DownloadManager.downloadNow(downloadFXTask);
+                
+                int randomNum = ThreadLocalRandom.current().nextInt(0, downloadDelay==0 ? 1: downloadDelay);
+                System.out.println("Random number: " + randomNum);
+                DownloadManager.downloadWithDelay(downloadFXTask, randomNum, TimeUnit.SECONDS);
 
                 downloadFXTask.setOnRunning(e -> {
                     Platform.runLater(() -> {
@@ -161,5 +173,11 @@ public class DownloadView extends BorderPane {
             }
 
         }
+    }
+
+
+    public static void setDownloadDelay(String value) {
+        value.replaceFirst(";", "");
+        downloadDelay = Integer.valueOf(value).intValue();
     }
 }

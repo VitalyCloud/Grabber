@@ -1,5 +1,6 @@
 package ArxivClient;
 
+import ArxivClient.Network.DownloadManager;
 import ArxivClient.UI.ViewLoader;;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,11 @@ public class Application extends javafx.application.Application {
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
 //        Testing.Search();
+
+        //Config downloadPoolSize
+        String poolSize = preferences.get("downloadPoolSize", "1");
+        poolSize.replace(";", "");
+        DownloadManager.setPoolSize(Integer.valueOf(poolSize));
     }
 
     public static Stage getMainStage() {

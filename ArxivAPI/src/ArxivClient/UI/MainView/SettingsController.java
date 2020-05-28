@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ArxivClient.Application;
+import ArxivClient.Network.DownloadManager;
+import ArxivClient.UIBridge.ArticleFileCreator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
@@ -52,6 +54,7 @@ public class SettingsController {
         //Save settings
         poolSizeVF.valueProperty().addListener((obs, oldValue, newValue) -> {
             Application.getPreferences().put("downloadPoolSize", String.valueOf(newValue));
+            DownloadManager.setPoolSize(newValue);
         });
 
         delayVF.valueProperty().addListener((obs, oldValue, newValue) -> {
@@ -80,6 +83,7 @@ public class SettingsController {
         if(selectedFile!=null) {
             documentPath.setText(selectedFile.getAbsolutePath());
             Application.getPreferences().put("downloadDirectory", selectedFile.getAbsolutePath());
+            ArticleFileCreator.updateDirectory(selectedFile.getAbsolutePath());
         }
     }
 }
