@@ -26,7 +26,6 @@ public class ArxivManager {
 
     //Find the articles
     public CompletableFuture<ArrayList<Article>> search(SearchRequest searchRequest)  {
-
         CompletableFuture<HttpResponse<String>> futureResponse = network.sendGETRequest(searchRequest);
         CompletableFuture<ArrayList<Article>> futureParsedResponse = futureResponse.thenApply((response) -> {
             parser.parseSearchRequest(response.body());
@@ -35,23 +34,4 @@ public class ArxivManager {
 
         return futureParsedResponse;
     }
-
-//    //Download article
-//    public void download(Article article, FileDescriber describer, DownloadTaskCompletion completion) {
-//        URL url = null;
-//        File file = null;
-//
-//        try {
-//            url = new URL(article.getLinkToPDF());
-//            file = FileManager.createNewFile(describer);
-//        } catch (Exception ex) {
-//            completion.complete(null, ex);
-//        }
-//
-//        DownloadTask task = new DownloadTask(url, file, completion);
-//        DownloadManager.downloadNow(task);
-//
-//        //TODO: Add exceptions to handle posible errors
-//        //TODO: Implement
-//    }
 }

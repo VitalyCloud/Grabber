@@ -3,10 +3,12 @@ package ArxivClient.UI.SearchView;
 import ArxivClient.ArxivAPI.Parameters.MaxResult;
 import ArxivClient.ArxivAPI.Parameters.Start;
 import ArxivClient.ArxivAPI.SearchRequest;
+import ArxivClient.UI.LoadingPane;
 import ArxivClient.UI.MainView.MainController;
 import ArxivClient.UI.ResultView.ArticleResultModel;
 import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UIBridge.SearchArticleService;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,6 +38,8 @@ public class SearchView extends BorderPane {
     StartAtPane startAtPane;
     MaxValuePane maxValuePane;
 
+    LoadingPane loadingPane;
+
     public SearchView() {
         paneForRows = new VBox();
         paneForBottom = new HBox();
@@ -46,6 +50,7 @@ public class SearchView extends BorderPane {
         searchArticleService = new SearchArticleService(resultView.getResultModels());
         startAtPane = new StartAtPane();
         maxValuePane = new MaxValuePane();
+        loadingPane = new LoadingPane();
 
         contentPane = new ScrollPane();
         contentPane.setFitToWidth(true);
@@ -69,6 +74,21 @@ public class SearchView extends BorderPane {
             showResultView(false);
         });
 
+        searchArticleService.setOnRunning(e -> {
+            Platform.runLater(()->{
+                paneForBottom.setVisible(false);
+                loadingPane.startLoading();
+                setCenter(loadingPane);
+            });
+        });
+
+        searchArticleService.setOnSucceeded(e -> {
+            Platform.runLater(()->{
+                loadingPane.stopLoading();
+                showResultView(true);
+            });
+        });
+
 
         //Выполнить поиск
         searchButton.setOnAction(e -> {
@@ -83,7 +103,6 @@ public class SearchView extends BorderPane {
             searchArticleService.setSearchRequest(searchRequest);
             searchArticleService.start();
 
-            showResultView(true);
         });
 
         searchArticleService.setOnFailed(e -> {
@@ -134,6 +153,7 @@ public class SearchView extends BorderPane {
             startAtPane.setVisible(true);
             maxValuePane.setVisible(true);
         }
+        paneForBottom.setVisible(true);
     }
 
     public ObservableList<ArticleResultModel> getListInResults() {

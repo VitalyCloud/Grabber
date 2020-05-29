@@ -42,7 +42,6 @@ public class SearchArticleService extends Service<ObservableList<ArticleResultMo
                         articleResultModel.getCheckBox().setVisible(false);
                     }
                     // --------------------------------------------------------------------
-
                     observableList.add(articleResultModel);
                 }));
 
