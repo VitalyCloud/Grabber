@@ -48,19 +48,11 @@ public class TableResultView extends TableView<ArticleResultModel> {
         commentColumn = new TableResultColumn("comment", "comment");
         doiColumn = new TableResultColumn("doi", "doi");
 
-        getColumns().addAll(checkBoxColumn, progressColumn, idColumn, lastUpdatedColumn, titleColumn,
-                publishedColumn, summaryColumn, authorsColumn, categoriesColumn, linkToDOIColumn,
-                linkToPDFColumn, linkToWebSiteColumn, primaryCategoryColumn, journalRefsColumn, commentColumn,
-                doiColumn);
-
-        idColumn.setVisible(false);
-        lastUpdatedColumn.setVisible(false);
-        summaryColumn.setVisible(false);
-        linkToDOIColumn.setVisible(false);
-        journalRefsColumn.setVisible(false);
-        commentColumn.setVisible(false);
-        doiColumn.setVisible(false);
+        getColumns().addAll(checkBoxColumn, progressColumn, titleColumn, authorsColumn, publishedColumn,
+                primaryCategoryColumn, summaryColumn, doiColumn);
         progressColumn.setVisible(false);
+
+        setSelectionModel(null);
     }
 
     static class TableResultColumn extends TableColumn<ArticleResultModel, String> {
