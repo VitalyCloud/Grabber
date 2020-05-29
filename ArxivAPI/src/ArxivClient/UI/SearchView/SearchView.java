@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -105,7 +106,20 @@ public class SearchView extends BorderPane {
 
         });
 
+
+        //TODO: Test this
         searchArticleService.setOnFailed(e -> {
+            Platform.runLater(() -> {
+                loadingPane.stopLoading();
+                showResultView(false);
+            });
+            searchArticleService.getException().printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error while downloading");
+            alert.setContentText(searchArticleService.getException().getMessage());
+            alert.showAndWait();
+
             searchArticleService.getException().printStackTrace();
         });
 
@@ -120,12 +134,10 @@ public class SearchView extends BorderPane {
                         MainController.getDownloadView().addArticle(articleToDownload);
                         article.getCheckBox().setVisible(false);
                     } else {
-                        //TODO:: Fix this
                         article.getCheckBox().setVisible(false);
                     }
                 }
             });
-
         });
     }
 
@@ -149,7 +161,8 @@ public class SearchView extends BorderPane {
         } else {
             setCenter(contentPane);
             int downloadIndex = paneForBottom.getChildren().indexOf(addButton);
-            paneForBottom.getChildren().set(downloadIndex, searchButton);
+            paneForBottom.getChildren().clear();
+            paneForBottom.getChildren().add(searchButton);
             startAtPane.setVisible(true);
             maxValuePane.setVisible(true);
         }
