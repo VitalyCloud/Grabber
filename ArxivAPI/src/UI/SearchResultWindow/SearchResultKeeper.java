@@ -1,11 +1,6 @@
 package UI.SearchResultWindow;
 
-import ArxivClient.ArxivAPI.Article.Article;
-import ArxivClient.ArxivAPI.Handlers.SearchCompletion;
-import UI.Search.SearchRow;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import ArxivClient.ArxivAPI.Article.Article;;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -19,12 +14,13 @@ public class SearchResultKeeper {
     }
 
     public void setArticles(ArrayList<Article> articles) {
-//        rootPane.getChildren().clear();
+        rootPane.getChildren().clear();
 
         System.out.println("Articles size " + articles.size());
-        for (int i=0; i<articles.size(); i++) {
-            SearchResultRow newRow = new SearchResultRow();
+
+        articles.forEach((article -> {
+            SearchResultRow newRow = new SearchResultRow(article);
             rootPane.getChildren().add(newRow);
-        }
+        }));
     }
 }

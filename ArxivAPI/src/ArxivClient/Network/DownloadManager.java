@@ -5,11 +5,11 @@ public class DownloadManager {
     private static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
 
-    public static void downloadNow(DownloadTask task) {
+    public static void downloadNow(Runnable task) {
         executor.execute(task);
     }
 
-    public static void downloadWithDelay(DownloadTask task, int delay, TimeUnit unit) {
+    public static void downloadWithDelay(Runnable task, int delay, TimeUnit unit) {
         executor.schedule(task, delay, unit);
     }
 

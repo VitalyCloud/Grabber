@@ -1,6 +1,7 @@
 package ArxivClient.ArxivAPI.Article;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Article {
 
@@ -26,9 +27,58 @@ public class Article {
     private String doi;
 
     public Article() {
-        authors = new ArrayList<>();
-        categories = new ArrayList<>();
-        journalRefs = new ArrayList<>();
+        authors = new ArrayList<>() {
+            @Override
+            public String toString() {
+                String result = "";
+                for(int i=0; i<authors.size(); i++) {
+                    Author author = authors.get(i);
+                    result+=author.toString() + "\n";
+                }
+                return result;
+            }
+        };
+        categories = new ArrayList<>() {
+            @Override
+            public String toString() {
+                String result = "";
+                for(int i=0; i<categories.size(); i++)
+                    result += categories.get(i) + "\n";
+                return result;
+            }
+        };
+        journalRefs = new ArrayList<>() {
+            @Override
+            public String toString() {
+                String result = "";
+                for(int i=0; i<journalRefs.size(); i++)
+                    result += journalRefs.get(i) + "\n";
+                return result;
+            }
+        };
+    }
+
+    //Copy Constructor
+    public Article(Article article) {
+        this();
+        setId(article.getId());
+        setLastUpdated(article.getLastUpdated());
+        setTitle(article.getTitle());
+        setPublished(article.getPublished());
+        setSummary(article.getSummary());
+        setAuthors(article.getAuthors());
+        setCategories(article.getCategories());
+        setLinkToWebSite(article.getLinkToWebSite());
+        setLinkToPDF(article.getLinkToPDF());
+        setLinkToDOI(article.getLinkToDOI());
+        setPrimaryCategory(article.getPrimaryCategory());
+        setJournalRefs(article.getJournalRefs());
+        setComment(article.getComment());
+        setDoi(article.getDoi());
+    }
+
+    public Article copy() {
+        return new Article(this);
     }
 
     public void print() {
@@ -57,12 +107,25 @@ public class Article {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return id.equals(article.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        if(!id.isEmpty())
+        if(id!=null & !id.isEmpty())
             this.id = id;
     }
 
@@ -71,7 +134,7 @@ public class Article {
     }
 
     public void setLastUpdated(String lastUpdated) {
-        if(!lastUpdated.isEmpty())
+        if(lastUpdated!=null & !lastUpdated.isEmpty())
             this.lastUpdated = lastUpdated;
     }
 
@@ -80,7 +143,7 @@ public class Article {
     }
 
     public void setTitle(String title) {
-        if(!title.isEmpty())
+        if(title!=null & !title.isEmpty())
             this.title = title;
     }
 
@@ -89,7 +152,7 @@ public class Article {
     }
 
     public void setPublished(String published) {
-        if(!published.isEmpty())
+        if(published!=null & !published.isEmpty())
             this.published = published;
     }
 
@@ -98,7 +161,7 @@ public class Article {
     }
 
     public void setSummary(String summary) {
-        if(!summary.isEmpty())
+        if(summary!=null & !summary.isEmpty())
             this.summary = summary;
     }
 
@@ -123,7 +186,7 @@ public class Article {
     }
 
     public void setLinkToWebSite(String linkToWebSite) {
-        if(!linkToWebSite.isEmpty())
+        if(linkToWebSite!=null & !linkToWebSite.isEmpty())
             this.linkToWebSite = linkToWebSite;
     }
 
@@ -132,7 +195,7 @@ public class Article {
     }
 
     public void setLinkToPDF(String linkToPDF) {
-        if(!linkToPDF.isEmpty())
+        if(linkToPDF!=null & !linkToPDF.isEmpty())
             this.linkToPDF = linkToPDF;
     }
 
@@ -141,7 +204,7 @@ public class Article {
     }
 
     public void setLinkToDOI(String linkToDOI) {
-        if(!linkToDOI.isEmpty())
+        if(linkToDOI!=null && !linkToDOI.isEmpty())
             this.linkToDOI = linkToDOI;
     }
 
@@ -150,7 +213,7 @@ public class Article {
     }
 
     public void setPrimaryCategory(String primaryCategory) {
-        if(!primaryCategory.isEmpty())
+        if(primaryCategory!=null & !primaryCategory.isEmpty())
             this.primaryCategory = primaryCategory;
     }
 
@@ -167,7 +230,7 @@ public class Article {
     }
 
     public void setComment(String comment) {
-        if(!comment.isEmpty())
+        if(comment!=null && !comment.isEmpty())
             this.comment = comment;
     }
 
@@ -176,7 +239,7 @@ public class Article {
     }
 
     public void setDoi(String doi) {
-        if(!doi.isEmpty())
+        if(doi!=null && !doi.isEmpty())
             this.doi = doi;
     }
 

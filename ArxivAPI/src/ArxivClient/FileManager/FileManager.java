@@ -5,10 +5,16 @@ import java.nio.file.FileAlreadyExistsException;
 
 public class FileManager {
 
-    public static File createNewFile(FileDescriber describer) throws FileAlreadyExistsException {
+    public static File createNewFile(FileDescriber describer, boolean forceFlag) throws IOException {
         File file = new File(describer.getAbsolutePath());
         if(file.exists()) {
-            throw new FileAlreadyExistsException("File " + describer.getAbsolutePath() + " is already exist");
+            if(forceFlag) {
+                file.delete();
+                file.createNewFile();
+                return file;
+            } else {
+                throw new FileAlreadyExistsException("File " + describer.getAbsolutePath() + " is already exist");
+            }
         }
         return file;
     }

@@ -1,11 +1,9 @@
 package UI.Search;
 
-import ArxivClient.ArxivAPI.Search.Field.BoolFlag;
-import ArxivClient.ArxivAPI.Search.Field.Field;
-import ArxivClient.ArxivAPI.Search.Field.Prefix.PrefixID;
-import ArxivClient.ArxivAPI.Search.Parameters.SearchQuery;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import ArxivClient.ArxivAPI.Field.BoolFlag;
+
+import ArxivClient.ArxivAPI.Field.SearchField;
+import ArxivClient.ArxivAPI.SearchRequest;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -29,17 +27,17 @@ public class SearchRowKeeper {
         firstRow.getBoolFlag().setVisible(false);
     }
 
-    public SearchQuery getSearchQuery() {
-        Field field = new Field();
-        searchRows.forEach( searchRow -> {
-            String text = searchRow.getTextField().getText();
-            if(!text.isEmpty()) {
-                BoolFlag boolFlag = searchRow.getBoolFlag().getValue();
-                PrefixID prefix = searchRow.getPrefix().getValue();
-                field.add(prefix, text, boolFlag);
-            }
-        });
-        SearchQuery searchQuery = new SearchQuery(field);
+    public SearchRequest getSearchQuery() {
+        SearchField field = new SearchField();
+//        searchRows.forEach( searchRow -> {
+//            String text = searchRow.getTextField().getText();
+//            if(!text.isEmpty()) {
+//                BoolFlag boolFlag = searchRow.getBoolFlag().getValue();
+//                PrefixID prefix = searchRow.getPrefix().getValue();
+//                field.add(prefix, text, boolFlag);
+//            }
+//        });
+        SearchRequest searchQuery = new SearchRequest(field);
         return searchQuery;
     }
 

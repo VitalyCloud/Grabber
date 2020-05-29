@@ -1,5 +1,6 @@
 package UI;
 
+
 import ArxivClient.ArxivAPI.Article.Article;
 import UI.Control.MenuBar;
 import UI.Control.StatusBar;

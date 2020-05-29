@@ -25,7 +25,6 @@ public class SearchResultRow extends Pane {
         VBox vBox = new VBox();
 
         Label label = new Label(article.getTitle());
-        System.out.println("Inside Row" + label.getText());
         vBox.getChildren().add(label);
 
         getChildren().add(vBox);
