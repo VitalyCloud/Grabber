@@ -31,6 +31,7 @@ public class DownloadView extends BorderPane {
     private HBox paneForDownloadButton;
     private Button downloadButton;
     private Button cancelButton;
+    private Button cancelAllButton;
 
     private ObservableList<ArticleResultModel> articleResultModels;
 
@@ -40,11 +41,13 @@ public class DownloadView extends BorderPane {
         paneForDownloadButton = new HBox();
         downloadButton = new Button("Dwonload");
         cancelButton = new Button("Cancel");
+        cancelAllButton = new Button("Cancel all");
         articleResultModels = FXCollections.observableArrayList();
         tableResultView.setItems(articleResultModels);
 
         paneForDownloadButton.getChildren().add(downloadButton);
         paneForDownloadButton.getChildren().add(cancelButton);
+        paneForDownloadButton.getChildren().add(cancelAllButton);
 
         contentPane.setContent(tableResultView);
 
@@ -65,7 +68,12 @@ public class DownloadView extends BorderPane {
 
         cancelButton.setOnAction(e -> {
             System.out.println("Cancel button pressed");
-            cancelButtonPressed();
+            cancelButtonPressed(false);
+        });
+
+        //TODO::Test this. Not well work
+        cancelAllButton.setOnAction(e -> {
+            cancelButtonPressed(true);
         });
     }
 
@@ -98,7 +106,6 @@ public class DownloadView extends BorderPane {
             if(model.getCheckBox().isSelected() && !model.downloadIsRunning()) {
 
                 DownloadFXTask downloadFXTask = model.createDownloadTask();
-                DownloadManager.setPoolSize(3);
 
 
                 int randomNum = ThreadLocalRandom.current().nextInt(0, downloadDelay==0 ? 1: downloadDelay);
@@ -131,8 +138,6 @@ public class DownloadView extends BorderPane {
                         alert.showAndWait();
                         alertIsShowing = false;
                     }
-
-
                 });
 
                 downloadFXTask.setOnSucceeded(e -> {
@@ -156,11 +161,11 @@ public class DownloadView extends BorderPane {
         });
     }
 
-    private void cancelButtonPressed() {
+    private void cancelButtonPressed(boolean cancelAllFlag) {
         ObservableList<ArticleResultModel> listInResults = MainController.getSearchView().getListInResults();
         for (int i=0; i<articleResultModels.size(); i++) {
             ArticleResultModel model = articleResultModels.get(i);
-            if(model.getCheckBox().isSelected()) {
+            if(model.getCheckBox().isSelected() || cancelAllFlag) {
                 articleResultModels.remove(model);
                 model.cancelDownloadTask();
 
@@ -169,9 +174,7 @@ public class DownloadView extends BorderPane {
                     listInResults.get(index).getCheckBox().setVisible(true);
                     listInResults.get(index).getCheckBox().setSelected(false);
                 }
-
             }
-
         }
     }
 
