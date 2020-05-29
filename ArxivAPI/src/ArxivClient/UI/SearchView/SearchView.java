@@ -1,6 +1,7 @@
 package ArxivClient.UI.SearchView;
 
 import ArxivClient.ArxivAPI.Parameters.MaxResult;
+import ArxivClient.ArxivAPI.Parameters.Start;
 import ArxivClient.ArxivAPI.SearchRequest;
 import ArxivClient.UI.MainView.MainController;
 import ArxivClient.UI.ResultView.ArticleResultModel;
@@ -12,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -28,9 +30,11 @@ public class SearchView extends BorderPane {
 
     ScrollPane contentPane;
 
-
     ResultView resultView;
     SearchArticleService searchArticleService;
+
+    StartAtPane startAtPane;
+    MaxValuePane maxValuePane;
 
     public SearchView() {
         paneForRows = new VBox();
@@ -40,6 +44,8 @@ public class SearchView extends BorderPane {
         searchRowHandler = new SearchRowHandler(paneForRows);
         resultView = new ResultView();
         searchArticleService = new SearchArticleService(resultView.getResultModels());
+        startAtPane = new StartAtPane();
+        maxValuePane = new MaxValuePane();
 
         contentPane = new ScrollPane();
         contentPane.setFitToWidth(true);
@@ -54,7 +60,9 @@ public class SearchView extends BorderPane {
     }
 
     public void configLogic() {
+        paneForBottom.getChildren().add(startAtPane);
         paneForBottom.getChildren().add(searchButton);
+        paneForBottom.getChildren().add(maxValuePane);
 
         //Венутсья к экрану поиска
         resultView.getReturnButton().setOnAction(e -> {
@@ -68,7 +76,8 @@ public class SearchView extends BorderPane {
             System.out.println(query);
 
             SearchRequest searchRequest = searchRowHandler.getSearchRequest();
-            searchRequest.setMaxResult(new MaxResult(10));
+            searchRequest.setMaxResult(new MaxResult(maxValuePane.getValue()));
+            searchRequest.setStart(new Start(startAtPane.getValue()));
 
             searchArticleService.reset();
             searchArticleService.setSearchRequest(searchRequest);
@@ -116,10 +125,14 @@ public class SearchView extends BorderPane {
             setCenter(resultView);
             int searchIndex = paneForBottom.getChildren().indexOf(searchButton);
             paneForBottom.getChildren().set(searchIndex, addButton);
+            startAtPane.setVisible(false);
+            maxValuePane.setVisible(false);
         } else {
             setCenter(contentPane);
             int downloadIndex = paneForBottom.getChildren().indexOf(addButton);
             paneForBottom.getChildren().set(downloadIndex, searchButton);
+            startAtPane.setVisible(true);
+            maxValuePane.setVisible(true);
         }
     }
 

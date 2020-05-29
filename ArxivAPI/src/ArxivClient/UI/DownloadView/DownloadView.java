@@ -100,7 +100,7 @@ public class DownloadView extends BorderPane {
                 DownloadFXTask downloadFXTask = model.createDownloadTask();
                 DownloadManager.setPoolSize(3);
 
-                
+
                 int randomNum = ThreadLocalRandom.current().nextInt(0, downloadDelay==0 ? 1: downloadDelay);
                 System.out.println("Random number: " + randomNum);
                 DownloadManager.downloadWithDelay(downloadFXTask, randomNum, TimeUnit.SECONDS);
