@@ -7,9 +7,9 @@ import org.w3c.dom.*;
 import java.util.ArrayList;
 
 public class XMLObject {
-    Element element;
-    NodeList childNodes;
-    NamedNodeMap attributes;
+    private Element element;
+    private NodeList childNodes;
+    private NamedNodeMap attributes;
 
     public XMLObject(Element element) {
         this.element = element;

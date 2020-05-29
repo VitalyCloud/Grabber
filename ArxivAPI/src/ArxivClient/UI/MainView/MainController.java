@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 
 import ArxivClient.UI.DownloadView.DownloadView;
-import ArxivClient.UI.ResultView.ResultView;
 import ArxivClient.UI.SearchView.SearchView;
 import ArxivClient.UI.ViewLoader;
 import javafx.fxml.FXML;

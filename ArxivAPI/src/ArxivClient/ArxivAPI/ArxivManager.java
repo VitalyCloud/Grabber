@@ -2,15 +2,8 @@ package ArxivClient.ArxivAPI;
 
 import ArxivClient.ArxivAPI.Article.Article;
 import ArxivClient.ArxivAPI.Parser.ResponseParser;
-import ArxivClient.FileManager.FileDescriber;
-import ArxivClient.FileManager.FileManager;
-//import ArxivClient.Network.Download.DownloadManager;
-import ArxivClient.Network.Download.DownloadTask;
-import ArxivClient.Network.Download.Handlers.DownloadTaskCompletion;
 import ArxivClient.Network.Network;
 
-import java.io.File;
-import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;

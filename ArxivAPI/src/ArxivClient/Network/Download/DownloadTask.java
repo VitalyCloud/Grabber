@@ -1,15 +1,12 @@
 package ArxivClient.Network.Download;
 
 import ArxivClient.Network.Download.Handlers.DownloadTaskProgressUpdate;
-import ArxivClient.Network.Download.Handlers.DownloadTaskCompletion;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class DownloadTask {

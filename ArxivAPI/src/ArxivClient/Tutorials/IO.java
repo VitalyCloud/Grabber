@@ -2,14 +2,10 @@ package ArxivClient.Tutorials;
 
 
 import java.io.File;
-import java.nio.file.Path;
+
 
 public class IO {
 
-
-    public static void main(String[] args) {
-
-    }
 
     public static void oldStyleFile() {
         File file = new File("/usr/bin/java");

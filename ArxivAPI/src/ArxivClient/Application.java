@@ -21,7 +21,6 @@ public class Application extends javafx.application.Application {
         stage.setTitle("MainView");
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
-//        Testing.Search();
 
         //Config downloadPoolSize
         String poolSize = preferences.get("downloadPoolSize", "1");

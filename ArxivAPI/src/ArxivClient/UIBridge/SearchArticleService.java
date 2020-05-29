@@ -13,9 +13,9 @@ import java.util.List;
 
 public class SearchArticleService extends Service<ObservableList<ArticleResultModel>> {
 
-    ArxivManager arxivManager = new ArxivManager();
-    SearchRequest searchRequest;
-    ObservableList<ArticleResultModel> observableList;
+    private ArxivManager arxivManager = new ArxivManager();
+    private SearchRequest searchRequest;
+    private ObservableList<ArticleResultModel> observableList;
 
     public SearchArticleService(ObservableList<ArticleResultModel> observableList) {
         this.observableList = observableList;
@@ -23,10 +23,10 @@ public class SearchArticleService extends Service<ObservableList<ArticleResultMo
 
     @Override
     protected Task<ObservableList<ArticleResultModel>> createTask() {
-        return new Task<ObservableList<ArticleResultModel>>() {
+        return new Task<>() {
             @Override
             protected ObservableList<ArticleResultModel> call() throws Exception {
-                if(searchRequest==null) {
+                if (searchRequest == null) {
                     throw new Exception("Search Request is null");
                 }
 
@@ -38,7 +38,7 @@ public class SearchArticleService extends Service<ObservableList<ArticleResultMo
 
                     //TODO: Fix this
                     int index = MainController.getDownloadView().getArticleResultModels().indexOf(articleResultModel);
-                    if(index!=-1) {
+                    if (index != -1) {
                         articleResultModel.getCheckBox().setVisible(false);
                     }
                     // --------------------------------------------------------------------

@@ -5,14 +5,13 @@ import ArxivClient.UIBridge.DownloadFXTask;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 
-import java.util.Comparator;
 
 
 public class ArticleResultModel extends Article {
-    ProgressIndicator progressIndicator;
-    CheckBox checkBox;
+    private ProgressIndicator progressIndicator;
+    private CheckBox checkBox;
 
-    String authorsAsString, categoriesAsString, journalRefsAsString;
+    private String authorsAsString, categoriesAsString, journalRefsAsString;
 
 
     public ArticleResultModel(Article article) {

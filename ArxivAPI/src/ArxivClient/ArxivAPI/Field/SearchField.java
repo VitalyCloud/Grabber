@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class SearchField implements AParameter {
 
     private final String paramenterName = "search_query=";
-    HashMap<Prefix, BoolFlag> prefixesProperty;
+    private HashMap<Prefix, BoolFlag> prefixesProperty;
     protected ArrayList<Prefix> prefixList;
 
     public SearchField() {

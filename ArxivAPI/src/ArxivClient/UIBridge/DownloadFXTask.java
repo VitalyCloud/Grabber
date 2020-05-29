@@ -1,14 +1,11 @@
 package ArxivClient.UIBridge;
 
-import ArxivClient.ArxivAPI.Article.Article;
-import ArxivClient.FileManager.FileDescriber;
-import ArxivClient.FileManager.FileExtension;
-import ArxivClient.FileManager.FileManager;
+
 import ArxivClient.Network.Download.DownloadConnection;
-import ArxivClient.Network.Download.DownloadTask;
+
 
 import ArxivClient.UI.ResultView.ArticleResultModel;
-import javafx.application.Platform;
+
 import javafx.concurrent.Task;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -16,9 +13,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.FileAlreadyExistsException;
 
 public class DownloadFXTask extends Task<File> {
 

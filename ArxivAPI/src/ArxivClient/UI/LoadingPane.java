@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 
 public class LoadingPane extends VBox {
 
-    ProgressIndicator progressIndicator;
-    Label label;
+    private ProgressIndicator progressIndicator;
+    private Label label;
 
     public LoadingPane() {
         progressIndicator = new ProgressIndicator();

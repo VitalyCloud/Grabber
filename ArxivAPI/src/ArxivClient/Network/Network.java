@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 // Get запросы
 public class Network {
-    HttpClient client;
+    private HttpClient client;
 
     public Network() {
         client = HttpClient.newHttpClient();

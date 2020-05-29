@@ -2,7 +2,6 @@ package ArxivClient.UI.MainView;
 
 
 import java.io.File;
-import java.net.Proxy;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,7 +14,6 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 
 public class SettingsController {
 

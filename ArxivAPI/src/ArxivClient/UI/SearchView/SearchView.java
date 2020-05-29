@@ -16,30 +16,29 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
 public class SearchView extends BorderPane {
 
-    VBox paneForRows;
-    HBox paneForBottom;
+    private VBox paneForRows;
+    private HBox paneForBottom;
 
-    SearchRowHandler searchRowHandler;
+    private SearchRowHandler searchRowHandler;
 
-    Button searchButton;
-    Button addButton;
+    private Button searchButton;
+    private Button addButton;
 
-    ScrollPane contentPane;
+    private ScrollPane contentPane;
 
-    ResultView resultView;
-    SearchArticleService searchArticleService;
+    private ResultView resultView;
+    private SearchArticleService searchArticleService;
 
-    StartAtPane startAtPane;
-    MaxValuePane maxValuePane;
+    private StartAtPane startAtPane;
+    private MaxValuePane maxValuePane;
 
-    LoadingPane loadingPane;
+    private LoadingPane loadingPane;
 
     public SearchView() {
         paneForRows = new VBox();
