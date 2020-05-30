@@ -16,7 +16,7 @@ public class SearchRowHandler {
 
     private ObservableList<SearchRow> searchRows;
 
-    SearchRowHandler(Pane pane) {
+    public SearchRowHandler(Pane pane) {
         this.pane = pane;
         searchRows = FXCollections.observableArrayList();
 

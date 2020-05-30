@@ -20,7 +20,6 @@ public class SearchRow extends HBox {
     private ComboBox<PrefixID> prefixBox;
     private Button actionButton;
 
-
     public SearchRow() {
         textField = new TextField();
         boolFlagBox = new ComboBox<>();
@@ -53,7 +52,6 @@ public class SearchRow extends HBox {
         boolFlagBox.setValue(BoolFlag.OR);
 
     }
-
 
     public TextField getTextField() {
         return textField;

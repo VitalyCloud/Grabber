@@ -22,23 +22,23 @@ import javafx.scene.layout.VBox;
 
 public class SearchView extends BorderPane {
 
-    private VBox paneForRows;
-    private HBox paneForBottom;
+    private final VBox paneForRows;
+    private final HBox paneForBottom;
 
-    private SearchRowHandler searchRowHandler;
+    private final SearchRowHandler searchRowHandler;
 
-    private Button searchButton;
-    private Button addButton;
+    private final Button searchButton;
+    private final Button addButton;
 
-    private ScrollPane contentPane;
+    private final ScrollPane contentPane;
 
-    private ResultView resultView;
-    private SearchArticleService searchArticleService;
+    private final ResultView resultView;
+    private final SearchArticleService searchArticleService;
 
-    private StartAtPane startAtPane;
-    private MaxValuePane maxValuePane;
+    private final StartAtPane startAtPane;
+    private final MaxValuePane maxValuePane;
 
-    private LoadingPane loadingPane;
+    private final LoadingPane loadingPane;
 
     public SearchView() {
         paneForRows = new VBox();
@@ -161,7 +161,7 @@ public class SearchView extends BorderPane {
             setCenter(contentPane);
             int downloadIndex = paneForBottom.getChildren().indexOf(addButton);
             paneForBottom.getChildren().clear();
-            paneForBottom.getChildren().add(searchButton);
+            paneForBottom.getChildren().addAll(startAtPane, searchButton, maxValuePane);
             startAtPane.setVisible(true);
             maxValuePane.setVisible(true);
         }
