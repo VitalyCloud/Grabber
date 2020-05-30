@@ -67,7 +67,7 @@ public class ArticleResultModel extends Article {
 
     //test code
 
-    DownloadFXTask downloadFXTask;
+    private DownloadFXTask downloadFXTask;
     public DownloadFXTask createDownloadTask() {
         downloadFXTask = new DownloadFXTask(this);
         this.getProgressIndicator().progressProperty().bind(downloadFXTask.progressProperty());

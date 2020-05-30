@@ -6,12 +6,13 @@ import ArxivClient.ArxivAPI.Prefix.Prefix;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SearchField implements AParameter {
 
     private final String paramenterName = "search_query=";
     private HashMap<Prefix, BoolFlag> prefixesProperty;
-    protected ArrayList<Prefix> prefixList;
+    protected List<Prefix> prefixList;
 
     public SearchField() {
         this.prefixList = new ArrayList<>();

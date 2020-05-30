@@ -17,19 +17,19 @@ import java.net.URL;
 
 public class DownloadFXTask extends Task<File> {
 
-    ArticleResultModel article;
-    ArticleFileCreator articleFileCreator;
+    private ArticleResultModel article;
+    private ArticleFileCreator articleFileCreator;
 
-    File file;
+    private File file;
 
     public DownloadFXTask(ArticleResultModel article) {
         this.article = article;
         this.articleFileCreator = new ArticleFileCreator();
     }
 
-    FileOutputStream fileOutputStream;
-    HttpsURLConnection downloadConnection;
-    BufferedInputStream bufferedInputStream;
+    private FileOutputStream fileOutputStream;
+    private HttpsURLConnection downloadConnection;
+    private BufferedInputStream bufferedInputStream;
 
     @Override
     protected File call() throws Exception {

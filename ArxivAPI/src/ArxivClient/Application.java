@@ -18,7 +18,7 @@ public class Application extends javafx.application.Application {
         mainStage = stage;
         preferences = Preferences.userRoot();
         Parent root = ViewLoader.load("MainView.fxml");
-        stage.setTitle("MainView");
+        stage.setTitle("Grabber");
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
 

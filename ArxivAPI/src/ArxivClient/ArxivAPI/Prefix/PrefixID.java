@@ -19,7 +19,7 @@ public enum PrefixID {
             return "Title";
         }
     },
-    _abstract {
+    abs {
         @Override
         public String toString() {
             return "Abstract";
